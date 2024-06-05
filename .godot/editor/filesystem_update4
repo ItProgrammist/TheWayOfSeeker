@@ -1,0 +1,11 @@
+res://menu.tscn
+res://level.tscn
+res://bg.tscn
+res://bg.gd
+res://Player/seeker.tscn
+res://Player/seeker.gd
+res://Mobs/skeleton.tscn
+res://Mobs/skeleton.gd
+res://Collectibles/gold_coin.tscn
+res://Collectibles/gold_coin.gd
+res://menu.gd

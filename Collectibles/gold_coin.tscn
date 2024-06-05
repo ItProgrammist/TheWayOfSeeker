@@ -1,0 +1,91 @@
+[gd_scene load_steps=20 format=3 uid="uid://8omdbdoox2lp"]
+
+[ext_resource type="Script" path="res://Collectibles/gold_coin.gd" id="1_tcjgu"]
+[ext_resource type="Texture2D" uid="uid://bty7rgomlyo2d" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0000_Capa-1.png" id="2_61844"]
+[ext_resource type="Texture2D" uid="uid://6lhgnsy5ohmi" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0001_Capa-2.png" id="3_7pf3m"]
+[ext_resource type="Texture2D" uid="uid://blnhcqcn0ntwe" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0002_Capa-3.png" id="4_xu6ja"]
+[ext_resource type="Texture2D" uid="uid://dx83tdb6qwqnl" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0003_Capa-4.png" id="5_7wh6k"]
+[ext_resource type="Texture2D" uid="uid://dx2fqodaxqqvb" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0004_Capa-5.png" id="6_653j0"]
+[ext_resource type="Texture2D" uid="uid://dk0mdoxsg7a77" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0005_Capa-6.png" id="7_wkrjd"]
+[ext_resource type="Texture2D" uid="uid://ddqe2ia2dsmi4" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0006_Capa-7.png" id="8_8bpi4"]
+[ext_resource type="Texture2D" uid="uid://ojjqauxhua42" path="res://Premium Coins/PNG/GOLD/BIG/BIG_0007_Capa-8.png" id="9_qb5ck"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d8wb"]
+atlas = ExtResource("2_61844")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3jdp"]
+atlas = ExtResource("3_7pf3m")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55tte"]
+atlas = ExtResource("4_xu6ja")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckchc"]
+atlas = ExtResource("5_7wh6k")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj865"]
+atlas = ExtResource("6_653j0")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msd3t"]
+atlas = ExtResource("7_wkrjd")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3p0m"]
+atlas = ExtResource("8_8bpi4")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hybov"]
+atlas = ExtResource("9_qb5ck")
+region = Rect2(0, 0, 82, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8lvjv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2d8wb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3jdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55tte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckchc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj865")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msd3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3p0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hybov")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qd0pe"]
+
+[node name="GoldCoin" type="Area2D"]
+script = ExtResource("1_tcjgu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.157766, 0.157884)
+sprite_frames = SubResource("SpriteFrames_8lvjv")
+autoplay = "default"
+frame_progress = 0.369235
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qd0pe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
