@@ -1,11 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=20 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
 [ext_resource type="Texture2D" uid="uid://cnhed0qprwxhc" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_r6e80"]
 [ext_resource type="Texture2D" uid="uid://b6rxhh5tmn2ma" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_dnehw"]
 [ext_resource type="Texture2D" uid="uid://buog20gu36iqu" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_8tqyp"]
 [ext_resource type="Texture2D" uid="uid://cceybwyswr8ku" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_ldgb2"]
-[ext_resource type="PackedScene" uid="uid://b688a0ng5501r" path="res://Mobs/skeleton.tscn" id="6_hutm5"]
+[ext_resource type="PackedScene" uid="uid://cashmutyhx8r4" path="res://Mobs/fire_golem/fire_golem.tscn" id="6_51wsh"]
+[ext_resource type="PackedScene" uid="uid://b688a0ng5501r" path="res://Mobs/skeleton/skeleton.tscn" id="6_hutm5"]
+[ext_resource type="Texture2D" uid="uid://d3oybrpujelql" path="res://CraftpixPacks/Kasaya's Frames/Book/Item or quest book2.png" id="8_5lln3"]
+[ext_resource type="Texture2D" uid="uid://c4dakbffy7gq" path="res://CraftpixPacks/Kasaya's Frames/Book/Item or quest book1.png" id="8_xlfqd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnvtf"]
 texture = ExtResource("5_ldgb2")
@@ -1258,6 +1261,61 @@ func _process(_delta):
 	text = \"Gold: \" + str($\"../../Seeker/Seeker\".gold)
 "
 
+[sub_resource type="LabelSettings" id="LabelSettings_32v8i"]
+
+[sub_resource type="GDScript" id="GDScript_sr1vb"]
+script/source = "extends Label
+
+@onready var anim = $AnimatedSprite2D
+var open = false
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Input.is_action_pressed(\"ui_diary_open\") and not open:
+		diary_open()
+		
+	elif Input.is_action_just_pressed(\"ui_diary_open\") and open:
+		diary_close()	
+		
+func diary_open():
+	anim.play(\"open\")
+	open = true
+	
+	await anim.animation_finished
+	
+func diary_close():
+	anim.play(\"default\")
+	open = false
+	
+	await anim.animation_finished
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw4to"]
+atlas = ExtResource("8_5lln3")
+region = Rect2(0, 0, 224, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ceug"]
+atlas = ExtResource("8_xlfqd")
+region = Rect2(0, 0, 224, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvvod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw4to")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ceug")
+}],
+"loop": true,
+"name": &"open",
+"speed": 60.0
+}]
+
 [sub_resource type="GDScript" id="GDScript_s0wp7"]
 script/source = "extends Node2D
 
@@ -1315,6 +1373,9 @@ position = Vector2(137, 564)
 
 [node name="Mobs" type="Node2D" parent="."]
 
+[node name="fire_golem" parent="Mobs" instance=ExtResource("6_51wsh")]
+position = Vector2(107, 565)
+
 [node name="Skeleton" parent="Mobs" instance=ExtResource("6_hutm5")]
 position = Vector2(247, 571)
 
@@ -1326,6 +1387,15 @@ position = Vector2(297, 571)
 
 [node name="Skeleton4" parent="Mobs" instance=ExtResource("6_hutm5")]
 position = Vector2(405, 571)
+
+[node name="Skeleton5" parent="Mobs" instance=ExtResource("6_hutm5")]
+position = Vector2(868, 545)
+
+[node name="Skeleton6" parent="Mobs" instance=ExtResource("6_hutm5")]
+position = Vector2(982, 511)
+
+[node name="Skeleton7" parent="Mobs" instance=ExtResource("6_hutm5")]
+position = Vector2(906, 542)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1347,11 +1417,34 @@ theme_override_font_sizes/font_size = 20
 text = "Gold: "
 script = SubResource("GDScript_2co4l")
 
+[node name="Label3" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.479
+anchor_top = 0.475
+anchor_right = 0.479
+anchor_bottom = 0.475
+offset_left = -19.808
+offset_top = -11.8
+offset_right = 20.192
+offset_bottom = 11.2
+label_settings = SubResource("LabelSettings_32v8i")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_sr1vb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Label3"]
+position = Vector2(26.5, 3.00002)
+scale = Vector2(3.87946, 3.225)
+sprite_frames = SubResource("SpriteFrames_kvvod")
+autoplay = "default"
+
 [node name="Collectibles" type="Node2D" parent="."]
 script = SubResource("GDScript_s0wp7")
 
 [node name="Timer" type="Timer" parent="Collectibles"]
 wait_time = 3.0
 autostart = true
+
+[node name="Effects" type="Node2D" parent="."]
 
 [connection signal="timeout" from="Collectibles/Timer" to="Collectibles" method="_on_timer_timeout"]

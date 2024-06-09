@@ -9,3 +9,13 @@ res://Mobs/skeleton.gd
 res://Collectibles/gold_coin.tscn
 res://Collectibles/gold_coin.gd
 res://menu.gd
+res://Mobs/fire_golem.tscn
+res://Mobs/fire_golem.gd
+res://Mobs/skeleton/skeleton.tscn
+res://Mobs/skeleton/skeleton.gd
+res://Mobs/fire_golem/fire_golem.tscn
+res://Mobs/fire_golem/fire_golem.gd
+res://effects/fire_effect.tscn
+res://effects/electro_effect.tscn
+res://effects/electro_effect.gd
+res://Books/Diary/diary.tscn

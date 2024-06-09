@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://snfsyrs2n13a"]
+
+[ext_resource type="Texture2D" uid="uid://c4dakbffy7gq" path="res://CraftpixPacks/Kasaya's Frames/Book/Item or quest book1.png" id="1_m0ri5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ceug"]
+atlas = ExtResource("1_m0ri5")
+region = Rect2(0, 0, 224, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4okjv"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ceug")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bn88"]
+size = Vector2(261, 158)
+
+[node name="Diary" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -7.62939e-06)
+scale = Vector2(2.29018, 1.86875)
+sprite_frames = SubResource("SpriteFrames_4okjv")
+animation = &"open"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_1bn88")
