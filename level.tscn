@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=25 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
 [ext_resource type="Texture2D" uid="uid://cnhed0qprwxhc" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_r6e80"]
@@ -6,9 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://buog20gu36iqu" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_8tqyp"]
 [ext_resource type="Texture2D" uid="uid://cceybwyswr8ku" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_ldgb2"]
 [ext_resource type="PackedScene" uid="uid://cashmutyhx8r4" path="res://Mobs/fire_golem/fire_golem.tscn" id="6_51wsh"]
-[ext_resource type="PackedScene" uid="uid://b688a0ng5501r" path="res://Mobs/skeleton/skeleton.tscn" id="6_hutm5"]
+[ext_resource type="PackedScene" uid="uid://b688a0ng5501r" path="res://Mobs/skeleton.tscn" id="6_hutm5"]
+[ext_resource type="PackedScene" uid="uid://d0obvaudbqo28" path="res://Mobs/bat/bat.tscn" id="8_2dqpg"]
 [ext_resource type="Texture2D" uid="uid://d3oybrpujelql" path="res://CraftpixPacks/Kasaya's Frames/Book/Item or quest book2.png" id="8_5lln3"]
 [ext_resource type="Texture2D" uid="uid://c4dakbffy7gq" path="res://CraftpixPacks/Kasaya's Frames/Book/Item or quest book1.png" id="8_xlfqd"]
+[ext_resource type="PackedScene" uid="uid://bqt15y2sofmg3" path="res://Mobs/anubis/anubis.tscn" id="11_m48rj"]
+[ext_resource type="PackedScene" uid="uid://bihdtxkvg1k76" path="res://Mobs/dragon/dragon.tscn" id="12_2aj1q"]
+[ext_resource type="PackedScene" uid="uid://brct6tkgdjfr4" path="res://Mobs/minotaur_beef/minotaur_beef.tscn" id="12_ecjry"]
+[ext_resource type="PackedScene" uid="uid://cd2hyc25jnros" path="res://Mobs/ventoss/ventoss.tscn" id="13_mha1w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnvtf"]
 texture = ExtResource("5_ldgb2")
@@ -1397,6 +1402,21 @@ position = Vector2(982, 511)
 [node name="Skeleton7" parent="Mobs" instance=ExtResource("6_hutm5")]
 position = Vector2(906, 542)
 
+[node name="bat" parent="Mobs" instance=ExtResource("8_2dqpg")]
+position = Vector2(38, 563)
+
+[node name="anubis" parent="Mobs" instance=ExtResource("11_m48rj")]
+position = Vector2(632, 562)
+
+[node name="minotaur_beef" parent="Mobs" instance=ExtResource("12_ecjry")]
+position = Vector2(759, 561)
+
+[node name="ventoss" parent="Mobs" instance=ExtResource("13_mha1w")]
+position = Vector2(514, 562)
+
+[node name="dragon" parent="Mobs" instance=ExtResource("12_2aj1q")]
+position = Vector2(1395, 557)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -1433,8 +1453,8 @@ vertical_alignment = 1
 script = SubResource("GDScript_sr1vb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Label3"]
-position = Vector2(26.5, 3.00002)
-scale = Vector2(3.87946, 3.225)
+position = Vector2(-348, -219)
+scale = Vector2(0.535712, 0.45)
 sprite_frames = SubResource("SpriteFrames_kvvod")
 autoplay = "default"
 

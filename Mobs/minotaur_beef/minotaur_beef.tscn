@@ -1,0 +1,167 @@
+[gd_scene load_steps=21 format=3 uid="uid://brct6tkgdjfr4"]
+
+[ext_resource type="Texture2D" uid="uid://dqi0j0fbj6y88" path="res://Animated Sideview Battlers/Minotaur Beef/Beef.png" id="1_6f14o"]
+[ext_resource type="Script" path="res://Mobs/minotaur_beef/minotaur_beef.gd" id="1_paqa0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0kpo"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4drsb"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(3072, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jh8yx"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(2560, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cu6dv"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(2048, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udiu7"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(3072, 1024, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khvwp"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(1536, 2048, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs3ud"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(1024, 2048, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5aug7"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xxm0"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(3072, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1rwv"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu2xd"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptwrc"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udwqn"]
+atlas = ExtResource("1_6f14o")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bstl5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0kpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4drsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jh8yx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cu6dv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udiu7")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khvwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs3ud")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5aug7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xxm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1rwv")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu2xd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptwrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udwqn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8bue0"]
+height = 38.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wj07e"]
+radius = 224.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p48oo"]
+size = Vector2(28, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3msfi"]
+size = Vector2(45, 4.5)
+
+[node name="minotaur_beef" type="CharacterBody2D"]
+script = ExtResource("1_paqa0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-11, -16)
+scale = Vector2(0.0996094, 0.125)
+sprite_frames = SubResource("SpriteFrames_bstl5")
+animation = &"Attack"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_8bue0")
+
+[node name="Detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+visible = false
+shape = SubResource("CircleShape2D_wj07e")
+
+[node name="Death" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_p48oo")
+
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("RectangleShape2D_3msfi")
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]
+[connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
+[connection signal="body_exited" from="Attack" to="." method="_on_attack_body_exited"]

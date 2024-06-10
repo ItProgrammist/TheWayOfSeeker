@@ -204,7 +204,6 @@ script = ExtResource("1_chf4p")
 position = Vector2(-2, -11)
 scale = Vector2(0.726667, 0.71598)
 sprite_frames = SubResource("SpriteFrames_58mmg")
-animation = &"Attack"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -214,7 +213,6 @@ shape = SubResource("CapsuleShape2D_osjfr")
 [node name="Detector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
-visible = false
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_blxme")
 
