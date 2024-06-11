@@ -204,6 +204,7 @@ script = ExtResource("1_chf4p")
 position = Vector2(-2, -11)
 scale = Vector2(0.726667, 0.71598)
 sprite_frames = SubResource("SpriteFrames_58mmg")
+animation = &"Attack"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cashmutyhx8r4"]
+[gd_scene load_steps=23 format=3 uid="uid://cashmutyhx8r4"]
 
 [ext_resource type="Texture2D" uid="uid://bcyjoqglj7xt5" path="res://Animated Sideview Battlers/Golem Ort/Golem.png" id="1_ny8o3"]
 [ext_resource type="Script" path="res://Mobs/fire_golem/fire_golem.gd" id="1_q7twn"]
@@ -14,6 +14,18 @@ region = Rect2(2048, 1536, 512, 512)
 [sub_resource type="AtlasTexture" id="AtlasTexture_maec5"]
 atlas = ExtResource("1_ny8o3")
 region = Rect2(2048, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xgyx"]
+atlas = ExtResource("1_ny8o3")
+region = Rect2(1024, 2560, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4toc6"]
+atlas = ExtResource("1_ny8o3")
+region = Rect2(3072, 2560, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkqht"]
+atlas = ExtResource("1_ny8o3")
+region = Rect2(2560, 2560, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eowpu"]
 atlas = ExtResource("1_ny8o3")
@@ -65,7 +77,21 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack",
-"speed": 2.0
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xgyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4toc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkqht")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -110,6 +136,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_buncq"]
 radius = 152.053
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xh4h"]
+size = Vector2(25.7936, 3.30658)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2shnl"]
 size = Vector2(77.1745, 3.22632)
 
@@ -132,6 +161,12 @@ visible = false
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_buncq")
 
+[node name="Death" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
+position = Vector2(-0.103188, -15.3467)
+shape = SubResource("RectangleShape2D_1xh4h")
+
 [node name="Attack" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
@@ -139,5 +174,6 @@ shape = SubResource("RectangleShape2D_2shnl")
 
 [connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
 [connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]
+[connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
 [connection signal="body_exited" from="Attack" to="." method="_on_attack_body_exited"]

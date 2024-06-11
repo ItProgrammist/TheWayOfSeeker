@@ -1,7 +1,5 @@
-res://Mobs/bat/bat.tscn
-res://bat.gd
-res://level.tscn
 res://menu.tscn
+res://level.tscn
 res://bg.tscn
 res://Player/seeker.tscn
 res://Mobs/skeleton/skeleton.tscn
@@ -9,11 +7,9 @@ res://Books/Diary/diary.tscn
 res://Collectibles/gold_coin.tscn
 res://Mobs/fire_golem/fire_golem.tscn
 res://effects/electro_effect.tscn
-res://Mobs/anubis/anubis.gd
+res://Mobs/bat/bat.tscn
 res://Mobs/anubis/anubis.tscn
 res://Mobs/minotaur_beef/minotaur_beef.tscn
-res://Mobs/minotaur_beef/minotaur_beef.gd
 res://Mobs/ventoss/ventoss.tscn
-res://Mobs/ventoss/ventoss.gd
 res://Mobs/dragon/dragon.tscn
-res://Mobs/dragon/dragon.gd
+res://Mobs/fire_golem/fire_golem.gd
