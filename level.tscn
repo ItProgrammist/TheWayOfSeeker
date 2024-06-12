@@ -1437,7 +1437,7 @@ vertical_alignment = 1
 script = SubResource("GDScript_sr1vb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Label3"]
-position = Vector2(-348, -219)
+position = Vector2(-148, -35)
 scale = Vector2(0.535712, 0.45)
 sprite_frames = SubResource("SpriteFrames_kvvod")
 autoplay = "default"
