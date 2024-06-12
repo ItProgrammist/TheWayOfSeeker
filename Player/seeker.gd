@@ -1,83 +1,116 @@
 extends CharacterBody2D
 
+enum{
+	MOVE,
+	ATTACK1,
+	ATTACK2,
+	ATTACK3
+}
 
-const SPEED = 300.0
+const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim = $AnimatedSprite2D
+@onready var anim_player = $AnimationPlayer
 @onready var seeker = $"."
 #@onready var mobs = "res://Mobs/"
 var health = 100
 var seeker_heat = false
 var gold = 0
 var seeker_heat_area = false
+var state = MOVE
+var run_speed = 1
+var combo = false
+var attack_cooldown = false
 
 var regex_enemi = RegEx.new()
 
 
 
 func _physics_process(delta):
+	match state:
+		MOVE:
+			move_state()
+		ATTACK1:
+			classic_attack()
+		ATTACK2:
+			combo_attack()
+		ATTACK3:
+			combo_attack2()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	if Input.is_action_just_pressed("ui_seeker_attack"):
-		anim.play("Attack")
-		seeker_heat = true
-		classic_attack(true)
-		await anim.animation_finished	
-		seeker_heat_area = false
-		seeker_heat = false
 		
-	if seeker_heat == false:
-		# Handle jump.
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-			anim.play("Jump")
-
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		var direction = Input.get_axis("ui_left", "ui_right")
-		if direction:
-			velocity.x = direction * SPEED
-			if velocity.y == 0:
-				anim.play("Run")
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			if velocity.y == 0:	
-				anim.play("default")
+		#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			#velocity.y = JUMP_VELOCITY
+			#anim_player.play("Jump")
 			
-		if direction == -1:
-			$AnimatedSprite2D.flip_h = true
-		elif direction == 1:
-			$AnimatedSprite2D.flip_h = false
-		if health  <= 0:
-			queue_free()
-			get_tree().change_scene_to_file("res://menu.tscn")
+		
+	if health  <= 0:
+		health = 0
+		anim_player.play("Death")
+		await get_tree().create_timer(1.2).timeout
+		#queue_free()
+		get_tree().change_scene_to_file("res://menu.tscn")
 
 	move_and_slide()
 
-
-#func _on_seeker_attack_body_entered(body):
-	#regex_enemi.compile("Skeleton.*")
-	#await anim.animation_finished
-	#if seekaer_heat_area and regex_enemi.search(body.name):
-		##classic_attack()
-		##var seeker_direction = (seeker.position - self.position).normalized()
-		##var enemy_direction = (body.position - self.position).normalized()	
-		##if abs(seeker.position.x - body.position.x) <= 30 \
-		##and abs(seeker.position.y - body.position.y) <= 15:
-		##and not(seeker_direction.x <= 0 and enemy_direction.x > 0 or seeker_direction.x > 0 and enemy_direction.x <= 0):
-			#body.health -= 100
-	#seeker_heat_area = false
-
 		
-func classic_attack(is_physics_process = false):
-	if not(is_physics_process):
-		seeker_heat = true
-		anim.play("Attack")
-		await anim.animation_finished
-		seeker_heat = false
-	seeker_heat_area = true
+
+
+
+func move_state():
+	var direction = Input.get_axis("ui_left", "ui_right")
+	if direction:
+		velocity.x = direction * SPEED * run_speed
+		if velocity.y == 0:
+			anim_player.play("Run")
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if velocity.y == 0:	
+			anim_player.play("default")
+	if direction == -1:
+		anim.flip_h = true
+	elif direction == 1:
+		anim.flip_h = false
+	if Input.is_action_pressed("run"):
+		run_speed = 2
+	else:
+		run_speed = 1
+	if Input.is_action_just_pressed("attack") and attack_cooldown == false:
+		state = ATTACK1
+		
+func classic_attack():
+	if Input.is_action_just_pressed("attack") and combo == true:
+		state = ATTACK2
+	velocity.x = 0
+	anim_player.play("Attack1")
+	await anim_player.animation_finished
+	attack_freeze()
+	state = MOVE
+
+func combo_attack():
+	if Input.is_action_just_pressed("attack") and combo == true:
+		state = ATTACK3
+	anim_player.play("Attack2")
+	await anim_player.animation_finished
+	state = MOVE
+
+func combo_attack2():
+	anim_player.play("Attack3")
+	await anim_player.animation_finished
+	state = MOVE
+
+func combo1():
+	combo = true
+	await anim_player.animation_finished
+	combo = false
+
+func attack_freeze():
+	attack_cooldown = true
+	await get_tree().create_timer(0.5).timeout
+	attack_cooldown = false

@@ -140,8 +140,8 @@ size = Vector2(32, 4)
 script = ExtResource("1_h0a4r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(9.53674e-07, -18.5096)
-scale = Vector2(0.116875, 0.130822)
+position = Vector2(9, -64)
+scale = Vector2(0.277188, 0.310265)
 sprite_frames = SubResource("SpriteFrames_vvxqe")
 animation = &"Attack"
 autoplay = "default"
@@ -161,7 +161,7 @@ shape = SubResource("CircleShape2D_xwndh")
 [node name="Death" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
-position = Vector2(0, -23)
+position = Vector2(10, -85)
 shape = SubResource("RectangleShape2D_qp8xq")
 
 [node name="Attack" type="Area2D" parent="."]

@@ -78,12 +78,10 @@ func attack(body):
 	seeker_is_damaged = true
 	await get_tree().create_timer(0.7).timeout
 	anim.play("Attack")
-	await anim.animation_finished
-	var seeker_direction = (seeker.position - self.position).normalized()
-	var skeleton_direction = (skeleton.position - self.position).normalized()	
+	await anim.animation_finished	
 	if alive and abs(seeker.position.x - skeleton.position.x) <= 30 \
 	and abs(seeker.position.y - skeleton.position.y) <= 15:
-			body.health -= 20
+			body.health -= 15
 	seeker_is_damaged = false
 
 func death():
