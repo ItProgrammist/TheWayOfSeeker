@@ -1,19 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=20 format=3 uid="uid://b5c2fm14vp4cy"]
 
+[ext_resource type="Script" path="res://level.gd" id="1_g5g0l"]
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
 [ext_resource type="Texture2D" uid="uid://cnhed0qprwxhc" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_r6e80"]
 [ext_resource type="Texture2D" uid="uid://b6rxhh5tmn2ma" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_dnehw"]
 [ext_resource type="Texture2D" uid="uid://buog20gu36iqu" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_8tqyp"]
 [ext_resource type="Texture2D" uid="uid://cceybwyswr8ku" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_ldgb2"]
-[ext_resource type="PackedScene" uid="uid://cashmutyhx8r4" path="res://Mobs/fire_golem/fire_golem.tscn" id="6_51wsh"]
-[ext_resource type="PackedScene" uid="uid://b688a0ng5501r" path="res://Mobs/skeleton.tscn" id="6_hutm5"]
-[ext_resource type="PackedScene" uid="uid://d0obvaudbqo28" path="res://Mobs/bat/bat.tscn" id="8_2dqpg"]
 [ext_resource type="Texture2D" uid="uid://d3oybrpujelql" path="res://CraftpixPacks/Kasaya's Frames/Book/Item or quest book2.png" id="8_5lln3"]
 [ext_resource type="Texture2D" uid="uid://c4dakbffy7gq" path="res://CraftpixPacks/Kasaya's Frames/Book/Item or quest book1.png" id="8_xlfqd"]
 [ext_resource type="PackedScene" uid="uid://bqt15y2sofmg3" path="res://Mobs/anubis/anubis.tscn" id="11_m48rj"]
-[ext_resource type="PackedScene" uid="uid://bihdtxkvg1k76" path="res://Mobs/dragon/dragon.tscn" id="12_2aj1q"]
-[ext_resource type="PackedScene" uid="uid://brct6tkgdjfr4" path="res://Mobs/minotaur_beef/minotaur_beef.tscn" id="12_ecjry"]
-[ext_resource type="PackedScene" uid="uid://cd2hyc25jnros" path="res://Mobs/ventoss/ventoss.tscn" id="13_mha1w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnvtf"]
 texture = ExtResource("5_ldgb2")
@@ -1335,6 +1330,7 @@ func _on_timer_timeout():
 "
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_g5g0l")
 
 [node name="BG" type="ParallaxBackground" parent="."]
 
@@ -1378,44 +1374,32 @@ position = Vector2(137, 564)
 
 [node name="Mobs" type="Node2D" parent="."]
 
-[node name="fire_golem" parent="Mobs" instance=ExtResource("6_51wsh")]
-position = Vector2(107, 565)
-
-[node name="Skeleton" parent="Mobs" instance=ExtResource("6_hutm5")]
-position = Vector2(247, 571)
-
-[node name="Skeleton2" parent="Mobs" instance=ExtResource("6_hutm5")]
-position = Vector2(345, 571)
-
-[node name="Skeleton3" parent="Mobs" instance=ExtResource("6_hutm5")]
-position = Vector2(297, 571)
-
-[node name="Skeleton4" parent="Mobs" instance=ExtResource("6_hutm5")]
-position = Vector2(405, 571)
-
-[node name="Skeleton5" parent="Mobs" instance=ExtResource("6_hutm5")]
-position = Vector2(868, 545)
-
-[node name="Skeleton6" parent="Mobs" instance=ExtResource("6_hutm5")]
-position = Vector2(982, 511)
-
-[node name="Skeleton7" parent="Mobs" instance=ExtResource("6_hutm5")]
-position = Vector2(906, 542)
-
-[node name="bat" parent="Mobs" instance=ExtResource("8_2dqpg")]
-position = Vector2(38, 563)
-
 [node name="anubis" parent="Mobs" instance=ExtResource("11_m48rj")]
 position = Vector2(632, 562)
 
-[node name="minotaur_beef" parent="Mobs" instance=ExtResource("12_ecjry")]
-position = Vector2(759, 561)
+[node name="Spawner_skeleton" type="Timer" parent="Mobs"]
+wait_time = 10.0
+autostart = true
 
-[node name="ventoss" parent="Mobs" instance=ExtResource("13_mha1w")]
-position = Vector2(514, 562)
+[node name="Spawner_golem" type="Timer" parent="Mobs"]
+wait_time = 20.0
+autostart = true
 
-[node name="dragon" parent="Mobs" instance=ExtResource("12_2aj1q")]
-position = Vector2(1395, 557)
+[node name="Spawner_bat" type="Timer" parent="Mobs"]
+wait_time = 15.0
+autostart = true
+
+[node name="Spawner_minotaur" type="Timer" parent="Mobs"]
+wait_time = 20.0
+autostart = true
+
+[node name="Spawner_ventoss" type="Timer" parent="Mobs"]
+wait_time = 20.0
+autostart = true
+
+[node name="Spawner_dragon" type="Timer" parent="Mobs"]
+wait_time = 20.0
+autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1467,4 +1451,10 @@ autostart = true
 
 [node name="Effects" type="Node2D" parent="."]
 
+[connection signal="timeout" from="Mobs/Spawner_skeleton" to="." method="_on_spawner_timeout"]
+[connection signal="timeout" from="Mobs/Spawner_golem" to="." method="_on_spawner_golem_timeout"]
+[connection signal="timeout" from="Mobs/Spawner_bat" to="." method="_on_spawner_bat_timeout"]
+[connection signal="timeout" from="Mobs/Spawner_minotaur" to="." method="_on_spawner_minotaur_timeout"]
+[connection signal="timeout" from="Mobs/Spawner_ventoss" to="." method="_on_spawner_ventoss_timeout"]
+[connection signal="timeout" from="Mobs/Spawner_dragon" to="." method="_on_spawner_dragon_timeout"]
 [connection signal="timeout" from="Collectibles/Timer" to="Collectibles" method="_on_timer_timeout"]

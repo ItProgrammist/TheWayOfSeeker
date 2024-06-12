@@ -1,5 +1,6 @@
-res://menu.tscn
+res://level.gd
 res://level.tscn
+res://menu.tscn
 res://bg.tscn
 res://Player/seeker.tscn
 res://Mobs/skeleton/skeleton.tscn
@@ -12,4 +13,3 @@ res://Mobs/anubis/anubis.tscn
 res://Mobs/minotaur_beef/minotaur_beef.tscn
 res://Mobs/ventoss/ventoss.tscn
 res://Mobs/dragon/dragon.tscn
-res://Mobs/fire_golem/fire_golem.gd

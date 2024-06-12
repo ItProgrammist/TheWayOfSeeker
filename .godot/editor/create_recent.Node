@@ -1,3 +1,4 @@
+Timer
 CollisionShape2D
 Area2D
 AnimatedSprite2D
@@ -5,7 +6,6 @@ CharacterBody2D
 Label
 CollisionPolygon2D
 Node2D
-Timer
 CanvasLayer
 Camera2D
 TileMap
