@@ -581,9 +581,7 @@ shape = SubResource("CapsuleShape2D_vcpqa")
 position = Vector2(2, -10)
 scale = Vector2(1.44444, 1.40541)
 sprite_frames = SubResource("SpriteFrames_rev4y")
-animation = &"Death"
 autoplay = "default"
-frame = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)

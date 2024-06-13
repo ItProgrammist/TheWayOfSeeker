@@ -1333,7 +1333,7 @@ func _on_timer_timeout():
 "
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvg58"]
-polygon = PackedVector2Array(-1907, 586, -1907, 659, 3843, 659, 3843, 587)
+polygon = PackedVector2Array(-1907, 586, -1907, 659, 3843, 659, 3843, 587, 3699.06, 586.975)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_g5g0l")
@@ -1380,7 +1380,7 @@ layer_0/tile_data = PackedInt32Array(2359296, 65536, 0, 2359297, 131072, 0, 2359
 [node name="Seeker" type="Node2D" parent="."]
 
 [node name="Seeker" parent="Seeker" instance=ExtResource("1_lcq2p")]
-position = Vector2(137, 564)
+position = Vector2(156, 564)
 
 [node name="Mobs" type="Node2D" parent="."]
 
@@ -1463,6 +1463,7 @@ autostart = true
 [node name="Effects" type="Node2D" parent="."]
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+enabled = false
 energy = 0.95
 blend_mode = 1
 range_layer_min = -1

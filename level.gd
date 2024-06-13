@@ -24,7 +24,7 @@ var state = MORNING
 func _ready():
 	light.enabled = true
 
-func _process(delta):
+func _process(_delta):
 	match state:
 		MORNING:
 			morning_state()
@@ -37,7 +37,7 @@ func _process(delta):
 
 func morning_state():
 	var tween = get_tree().create_tween()
-	tween.tween_property(light, "energy", 0.2, 120)
+	tween.tween_property(light, "energy", 0.0, 120)
 	var tween1 = get_tree().create_tween()
 	tween1.tween_property(point_light1, "energy", 0, 120)
 	var tween2 = get_tree().create_tween()
@@ -55,8 +55,11 @@ func _on_day_night_timeout():
 		state += 1
 	else:
 		state = MORNING
+
 func _on_spawner_timeout():
-	skeleton_spawn()
+	if Global.count_skeleton < 6:
+		Global.count_skeleton += 1
+		skeleton_spawn()
 
 func skeleton_spawn():
 	var skeleton = skeleton_preload.instantiate()
@@ -65,23 +68,33 @@ func skeleton_spawn():
 
 
 func _on_spawner_golem_timeout():
-	golem_spawn()
+	if Global.count_golem < 3:
+		Global.count_golem += 1
+		golem_spawn()
 
 
 func _on_spawner_bat_timeout():
-	bat_spawn()
+	if Global.count_bat < 7:
+		Global.count_bat += 1
+		bat_spawn()
 
 
 func _on_spawner_minotaur_timeout():
-	minotaur_spawn()
+	if Global.count_minotaur < 3:
+		Global.count_minotaur += 1
+		minotaur_spawn()
 
 
 func _on_spawner_ventoss_timeout():
-	ventoss_spawn()
+	if Global.count_ventoss < 3:
+		Global.count_ventoss += 1
+		ventoss_spawn()
 
 
 func _on_spawner_dragon_timeout():
-	dragon_spawn()
+	if Global.count_dragon < 1:
+		Global.count_dragon += 1
+		dragon_spawn()
 
 
 func bat_spawn():
