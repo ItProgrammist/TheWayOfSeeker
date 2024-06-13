@@ -88,4 +88,5 @@ func death():
 	alive = false
 	anim.play(("Death"))
 	await anim.animation_finished
+	Global.count_ventoss -= 1
 	queue_free()

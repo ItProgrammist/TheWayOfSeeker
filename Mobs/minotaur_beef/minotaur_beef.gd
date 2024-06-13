@@ -88,5 +88,6 @@ func death():
 	alive = false
 	anim.play(("Death"))
 	await anim.animation_finished
+	Global.count_minotaur -= 1	
 	queue_free()
 
