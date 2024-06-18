@@ -1,5 +1,5 @@
-res://level.tscn
 res://menu.tscn
+res://level.tscn
 res://bg.tscn
 res://Player/seeker.tscn
 res://Mobs/skeleton/skeleton.tscn
@@ -12,13 +12,8 @@ res://Mobs/anubis/anubis.tscn
 res://Mobs/minotaur_beef/minotaur_beef.tscn
 res://Mobs/ventoss/ventoss.tscn
 res://Mobs/dragon/dragon.tscn
-res://Player/seeker.gd
-res://Mobs/skeleton/skeleton.gd
-res://Mobs/fire_golem/fire_golem.gd
-res://bat.gd
-res://Mobs/anubis/anubis.gd
-res://Mobs/minotaur_beef/minotaur_beef.gd
-res://Mobs/ventoss/ventoss.gd
-res://Mobs/dragon/dragon.gd
 res://Build/shop.tscn
+res://Player/seeker.gd
+res://UI/inventory.tscn
 res://level.gd
+res://UI/item.tscn

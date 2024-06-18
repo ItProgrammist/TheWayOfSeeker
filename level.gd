@@ -3,6 +3,7 @@ extends Node2D
 @onready var light = $DirectionalLight2D
 @onready var point_light1 = $PointLight2D
 @onready var point_light2 = $PointLight2D2
+@onready var item = preload("res://UI/item.tscn")
 
 
 enum{
@@ -23,6 +24,16 @@ var state = MORNING
 
 func _ready():
 	light.enabled = true
+	
+	for i in range(15):
+		var num = randi_range(1, 20)
+		var new_item = item.instantiate()
+		$Items.add_child(new_item)
+		new_item.set_item(str(num))
+		new_item.position = Vector2(randi_range(-1000, 100), 570)
+
+func get_seeker():
+	return $Seeker/Seeker
 
 func _process(_delta):
 	match state:

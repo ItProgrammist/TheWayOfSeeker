@@ -16,6 +16,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
 @onready var anim_player = $AnimationPlayer
 @onready var seeker = $"."
+@onready var ui = get_viewport().get_node("Level/Inventory/Control")
 #@onready var mobs = "res://Mobs/"
 var health = 100
 var seeker_heat = false
@@ -25,6 +26,7 @@ var state = MOVE
 var run_speed = 1
 var combo = false
 var attack_cooldown = false
+var inventory = {}
 
 var regex_enemi = RegEx.new()
 
@@ -60,7 +62,17 @@ func _physics_process(delta):
 	move_and_slide()
 
 		
+func pick(item):
+	var it = item.get_item()
+	if it in inventory.keys():
+		inventory[it] += item.get_amount()
+	else:
+		inventory[it] = item.get_amount()
+	ui.update_inventory(inventory)
 
+func _unhandled_input(event):
+	if event.is_action_pressed("inventory"):
+		ui.toggle_inventory(inventory)
 
 
 func move_state():

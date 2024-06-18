@@ -1,3 +1,4 @@
+Node2D
 LightOccluder2D
 PointLight2D
 Timer
@@ -9,6 +10,5 @@ AnimationPlayer
 CharacterBody2D
 Label
 CollisionPolygon2D
-Node2D
 CanvasLayer
 Camera2D
