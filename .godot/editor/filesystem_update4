@@ -1,3 +1,6 @@
+res://UI/item_machine.tscn
+res://UI/item_machine.gd
+res://level.gd
 res://menu.tscn
 res://level.tscn
 res://bg.tscn
@@ -13,7 +16,16 @@ res://Mobs/minotaur_beef/minotaur_beef.tscn
 res://Mobs/ventoss/ventoss.tscn
 res://Mobs/dragon/dragon.tscn
 res://Build/shop.tscn
-res://Player/seeker.gd
 res://UI/inventory.tscn
-res://level.gd
 res://UI/item.tscn
+res://UI/invent_item.tscn
+res://UI/invent.tscn
+res://UI/inventory_slot.tscn
+res://UI/inventory_slot.gd
+res://UI/Item.gd
+res://UI/PanelContainer.gd
+res://Player/seeker.gd
+res://UI/Control.gd
+res://UI/invent_item.gd
+res://global.gd
+res://UI/invent.gd

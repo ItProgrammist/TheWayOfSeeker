@@ -80,4 +80,3 @@ text = "Drop
 "
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="ColorRect/Drop" to="." method="_on_drop_pressed"]

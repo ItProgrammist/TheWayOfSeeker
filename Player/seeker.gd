@@ -17,6 +17,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim_player = $AnimationPlayer
 @onready var seeker = $"."
 @onready var ui = get_viewport().get_node("Level/Inventory/Control")
+@onready var pre_inv = preload("res://UI/invent.tscn")
+@onready var pre_item = preload("res://UI/invent_item.tscn")
+@onready var world = get_viewport().get_node("Level")
 #@onready var mobs = "res://Mobs/"
 var health = 100
 var seeker_heat = false
@@ -26,7 +29,7 @@ var state = MOVE
 var run_speed = 1
 var combo = false
 var attack_cooldown = false
-var inventory = {}
+var inventory
 
 var regex_enemi = RegEx.new()
 
@@ -47,9 +50,9 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-		#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-			#velocity.y = JUMP_VELOCITY
-			#anim_player.play("Jump")
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		anim_player.play("Jump")
 			
 		
 	if health  <= 0:
@@ -63,17 +66,28 @@ func _physics_process(delta):
 
 		
 func pick(item):
-	var it = item.get_item()
-	if it in inventory.keys():
-		inventory[it] += item.get_amount()
-	else:
-		inventory[it] = item.get_amount()
-	ui.update_inventory(inventory)
+	self.inventory.add_item(item)
+	return true
 
 func _unhandled_input(event):
 	if event.is_action_pressed("inventory"):
 		ui.toggle_inventory(inventory)
 
+func create_inventory():
+	inventory = pre_inv.instantiate()
+	add_child(inventory)
+	inventory.set_inv_owner(self)
+
+func _ready():
+	create_inventory()
+	#inventory.connect("on_changed", self, "update_inventory")
+
+func drop_item(link):
+	world.add_lying_item(link, position.x, position.y)
+	inventory.remove_item(link)
+
+func update_inventory():
+	ui.update_inventory(inventory)
 
 func move_state():
 	var direction = Input.get_axis("ui_left", "ui_right")
