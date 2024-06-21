@@ -143,6 +143,8 @@ size = Vector2(25.7936, 3.30658)
 size = Vector2(77.1745, 3.22632)
 
 [node name="fire_golem" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_q7twn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

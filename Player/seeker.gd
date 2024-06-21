@@ -1,10 +1,14 @@
 extends CharacterBody2D
 
+signal health_changed (new_health)
+
 enum{
 	MOVE,
 	ATTACK1,
 	ATTACK2,
-	ATTACK3
+	ATTACK3,
+	DAMAGE,
+	DEATH
 }
 
 const SPEED = 150.0
@@ -16,8 +20,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
 @onready var anim_player = $AnimationPlayer
 @onready var seeker = $"."
+@onready var ui = get_viewport().get_node("Level/Inventory/Control")
 #@onready var mobs = "res://Mobs/"
-var health = 100
+
+var seeker_pos
+var armor_index = 1.0
+var max_health = 100 * armor_index
+var health
 var seeker_heat = false
 var gold = 0
 var seeker_heat_area = false
@@ -25,12 +34,16 @@ var state = MOVE
 var run_speed = 1
 var combo = false
 var attack_cooldown = false
+var inventory = {}
 
 var regex_enemi = RegEx.new()
 
-
+func _ready():
+	Signals.connect("enemy_attack", Callable(self, "_on_damage_recieved"))
+	health = max_health
 
 func _physics_process(delta):
+	
 	match state:
 		MOVE:
 			move_state()
@@ -40,27 +53,40 @@ func _physics_process(delta):
 			combo_attack()
 		ATTACK3:
 			combo_attack2()
+		DAMAGE:
+			damage_state()
+		DEATH:
+			death_state()
 	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-		#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-			#velocity.y = JUMP_VELOCITY
-			#anim_player.play("Jump")
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		anim_player.play("Jump")	
 			
-		
-	if health  <= 0:
+	if health <= 0:
 		health = 0
-		anim_player.play("Death")
-		await get_tree().create_timer(1.2).timeout
-		#queue_free()
-		get_tree().change_scene_to_file("res://menu.tscn")
+		state = DEATH
 
 	move_and_slide()
+	
+	seeker_pos = self.position
+	Signals.emit_signal("seeker_position_update", seeker_pos)
 
 		
+func pick(item):
+	var it = item.get_item()
+	if it in inventory.keys():
+		inventory[it] += item.get_amount()
+	else:
+		inventory[it] = item.get_amount()
+	ui.update_inventory(inventory)
 
+func _unhandled_input(event):
+	if event.is_action_pressed("inventory"):
+		ui.toggle_inventory(inventory)
 
 
 func move_state():
@@ -114,3 +140,23 @@ func attack_freeze():
 	attack_cooldown = true
 	await get_tree().create_timer(0.5).timeout
 	attack_cooldown = false
+
+func damage_state():
+	velocity.x = 0
+	anim.play("Damage")
+	#await anim.animation_finished
+	state = MOVE
+
+func death_state():
+	velocity.x = 0
+	anim.play("Death")
+	await get_tree().create_timer(0.7).timeout
+	queue_free()
+	#get_tree().change_scene_to_file("res://menu.tscn")
+	get_tree().change_scene_to_file.bind("res://menu.tscn").call_deferred()
+
+func _on_damage_recieved(enemy_damage):
+	health -= enemy_damage
+	emit_signal("health_changed", health)
+	state = DAMAGE
+	

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bs6mmr8h5nahq"]
+
+[ext_resource type="Script" path="res://UI/invent_item.gd" id="1_35d5m"]
+[ext_resource type="Texture2D" uid="uid://dj3jea4ujn6li" path="res://UI/item_sheet.png/1.png" id="1_g83fc"]
+
+[node name="InventItem" type="TextureRect"]
+offset_right = 227.0
+offset_bottom = 227.0
+texture = ExtResource("1_g83fc")
+script = ExtResource("1_35d5m")
+
+[node name="Amount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 155.0
+offset_right = 182.0
+offset_bottom = 210.0
+theme_override_font_sizes/font_size = 40
+text = "1"

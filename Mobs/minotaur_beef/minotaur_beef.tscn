@@ -130,6 +130,8 @@ size = Vector2(28, 5)
 size = Vector2(45, 4.5)
 
 [node name="minotaur_beef" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_paqa0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

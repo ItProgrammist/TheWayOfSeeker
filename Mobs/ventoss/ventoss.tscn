@@ -110,6 +110,8 @@ size = Vector2(13, 3)
 size = Vector2(24, 3)
 
 [node name="ventoss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_na7wc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
