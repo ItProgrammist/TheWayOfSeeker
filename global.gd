@@ -7,3 +7,4 @@ var count_minotaur = 0
 var count_ventoss = 0
 var count_dragon = 0
 
+

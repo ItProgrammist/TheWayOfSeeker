@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2pmwqu1gtf6y"]
+
+[ext_resource type="Script" path="res://UI/invent.gd" id="1_dbmhn"]
+
+[node name="Invent" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dbmhn")

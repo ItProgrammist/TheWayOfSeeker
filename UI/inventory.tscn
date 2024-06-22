@@ -3,13 +3,7 @@
 [ext_resource type="Script" path="res://UI/Control.gd" id="1_goxsb"]
 [ext_resource type="Texture2D" uid="uid://mgrd3kx4vu27" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/1/slots 8x5.png" id="2_ci14c"]
 [ext_resource type="Script" path="res://UI/PanelContainer.gd" id="2_jlc5w"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0gnyu"]
-texture = ExtResource("2_ci14c")
-texture_margin_left = 3.0
-texture_margin_top = 3.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
+[ext_resource type="PackedScene" uid="uid://bs6mmr8h5nahq" path="res://UI/invent_item.tscn" id="4_qe44v"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -22,22 +16,73 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_goxsb")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PanelContainer" type="NinePatchRect" parent="Control"]
+custom_minimum_size = Vector2(800, 500)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 216.0
-offset_top = 137.0
-offset_right = -309.0
-offset_bottom = -156.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -575.0
+offset_top = -320.0
+offset_right = 575.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0gnyu")
+texture = ExtResource("2_ci14c")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
 script = ExtResource("2_jlc5w")
 
 [node name="GridContainer" type="GridContainer" parent="Control/PanelContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 15
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -548.0
+offset_top = -309.0
+offset_right = 554.0
+offset_bottom = 302.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 20
 columns = 8
+
+[node name="InventItem" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem2" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem3" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem4" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem5" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem6" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem7" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem8" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem9" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem10" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2
+
+[node name="InventItem11" parent="Control/PanelContainer/GridContainer" instance=ExtResource("4_qe44v")]
+layout_mode = 2

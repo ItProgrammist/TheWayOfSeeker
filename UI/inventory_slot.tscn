@@ -1,0 +1,109 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgaiybvuug5ql"]
+
+[ext_resource type="Script" path="res://UI/inventory_slot.gd" id="1_cg54a"]
+[ext_resource type="Texture2D" uid="uid://dj3jea4ujn6li" path="res://UI/item_sheet.png/1.png" id="2_pt4cv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_47ews"]
+
+[node name="Inventory_slot" type="Control"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 160.0
+script = ExtResource("1_cg54a")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.31657, 0.261029, 0.0955136, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -70.0
+offset_right = 70.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.480775, 0.402329, 0.295928, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect2"]
+position = Vector2(70, 70)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_pt4cv")
+
+[node name="Label" type="Label" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -35.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "1"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_47ews")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_top = -135.0
+offset_right = 230.0
+offset_bottom = -5.0
+color = Color(0.480775, 0.402329, 0.295928, 1)
+
+[node name="Use" type="Button" parent="ColorRect3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_top = 15.0
+offset_right = 110.0
+offset_bottom = 58.0
+grow_horizontal = 2
+text = "Use
+"
+
+[node name="Drop" type="Button" parent="ColorRect3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -60.0
+offset_right = 110.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Drop
+"
+
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
