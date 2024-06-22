@@ -29,12 +29,16 @@ func _ready():
 	health_bar.value = health_bar.max_value
 	light.enabled = true
 	
-	for i in range(15):
-		var num = randi_range(1, 20)
-		var new_item = item.instantiate()
+	for i in range(100):
+		var num = randi_range(1, 10)
+		var new_item = ItemMachine.generate_item(str(num))
 		$Items.add_child(new_item)
-		new_item.set_item(str(num))
-		new_item.position = Vector2(randi_range(-1000, 100), 570)
+		new_item.position = Vector2(randi_range(-1000, 1100), 570)
+
+func add_lying_item(i, x, y):
+	var new_item = ItemMachine.generate_item(i.get_item_name(), i.get_amount())
+	$Items.add_child(new_item)
+	new_item.position = Vector2(x, y)
 
 func get_seeker():
 	return $Seeker/Seeker

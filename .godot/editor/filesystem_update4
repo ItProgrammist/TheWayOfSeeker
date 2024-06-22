@@ -15,11 +15,7 @@ res://Mobs/dragon/dragon.tscn
 res://Build/shop.tscn
 res://UI/inventory.tscn
 res://UI/item.tscn
-res://Player/seeker.gd
-res://UI/PanelContainer.gd
 res://UI/invent_item.tscn
-res://level.gd
-res://Mobs/skeleton/skeleton.gd
-res://scn/signals.gd
 res://scn/DamageBox/damage_box.tscn
-res://scn/DamageBox/damage_box.gd
+res://UI/inventory_slot.tscn
+res://UI/item_machine.tscn

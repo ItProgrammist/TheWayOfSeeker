@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://global.gd"
 Signals="*res://scn/signals.gd"
+ItemMachine="*res://UI/item_machine.tscn"
 
 [editor_plugins]
 

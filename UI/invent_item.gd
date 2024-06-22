@@ -54,4 +54,3 @@ func _on_button_pressed():
 
 func _on_drop_pressed():
 	inventory.get_inv_owner().drop_item(self)
-	

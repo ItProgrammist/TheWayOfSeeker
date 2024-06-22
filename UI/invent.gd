@@ -32,6 +32,3 @@ func remove_item(link):
 	items.remove_at(items.find(link))
 	link.queue_free()
 	emit_signal("on_changed")
-
-
-

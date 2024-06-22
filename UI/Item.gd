@@ -41,4 +41,3 @@ func get_amount():
 
 func get_item_stack():
 	return stack_limit
-

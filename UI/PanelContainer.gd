@@ -20,4 +20,3 @@ func show_inventory(inventory):
 	for i in inventory.get_items():
 		#i.set_invent_owner(inventory_owner)
 		container.add_child(i)
-
