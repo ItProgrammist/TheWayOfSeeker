@@ -3,7 +3,9 @@ extends Node2D
 @onready var light = $DirectionalLight2D
 @onready var point_light1 = $PointLight2D
 @onready var point_light2 = $PointLight2D2
-
+@onready var item = preload("res://UI/item.tscn")
+@onready var health_bar = $CanvasLayer2/HealthBar
+@onready var seeker = $Seeker/Seeker
 
 
 enum{
@@ -23,18 +25,16 @@ var dragon_preload = preload("res://Mobs/dragon/dragon.tscn")
 var state = MORNING
 
 func _ready():
+	health_bar.max_value = seeker.max_health
+	health_bar.value = health_bar.max_value
 	light.enabled = true
 	
-	for i in range(100):
-		var num = randi_range(1, 10)
-		var new_item = ItemMachine.generate_item(str(num))
+	for i in range(15):
+		var num = randi_range(1, 20)
+		var new_item = item.instantiate()
 		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
-
-func add_lying_item(i, x, y):
-	var new_item = ItemMachine.generate_item(i.get_item_name(), i.get_amount())
-	$Items.add_child(new_item)
-	new_item.position = Vector2(x, y)
+		new_item.set_item(str(num))
+		new_item.position = Vector2(randi_range(-1000, 100), 570)
 
 func get_seeker():
 	return $Seeker/Seeker
@@ -136,3 +136,7 @@ func dragon_spawn():
 	var dragon = dragon_preload.instantiate()
 	dragon.position = Vector2 (1600, 570)
 	$Mobs.add_child(dragon)
+
+
+func _on_seeker_health_changed(new_health):
+	health_bar.value = new_health
