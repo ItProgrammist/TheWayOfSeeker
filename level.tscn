@@ -1,12 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=20 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_g5g0l"]
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
+[ext_resource type="Script" path="res://Pause.gd" id="2_e5fcc"]
 [ext_resource type="Texture2D" uid="uid://cnhed0qprwxhc" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_r6e80"]
 [ext_resource type="Texture2D" uid="uid://b6rxhh5tmn2ma" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_dnehw"]
 [ext_resource type="Texture2D" uid="uid://buog20gu36iqu" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_8tqyp"]
 [ext_resource type="Texture2D" uid="uid://cceybwyswr8ku" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_ldgb2"]
 [ext_resource type="PackedScene" uid="uid://dkb00dhnq7atx" path="res://Build/shop.tscn" id="5_tmf5r"]
+[ext_resource type="PackedScene" uid="uid://d0d3ei5ncwuqf" path="res://UI/pause_menu.tscn" id="9_ssbkr"]
 [ext_resource type="Texture2D" uid="uid://bjoy7fw0fiudv" path="res://oak_woods_v1.0/decorations/circle.png" id="11_ivukq"]
 [ext_resource type="PackedScene" uid="uid://bqt15y2sofmg3" path="res://Mobs/anubis/anubis.tscn" id="11_m48rj"]
 [ext_resource type="PackedScene" uid="uid://dvvk20we6t4tr" path="res://UI/inventory.tscn" id="12_j5j2b"]
@@ -1284,6 +1286,10 @@ polygon = PackedVector2Array(-1907, 586, -1907, 659, 3843, 659, 3843, 587, 3699.
 [node name="Level" type="Node2D"]
 script = ExtResource("1_g5g0l")
 
+[node name="Pause" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_e5fcc")
+
 [node name="BG" type="ParallaxBackground" parent="."]
 layer = -1
 
@@ -1360,6 +1366,7 @@ autostart = true
 position = Vector2(156, 564)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 26.0
@@ -1378,6 +1385,22 @@ offset_bottom = 156.0
 theme_override_font_sizes/font_size = 40
 text = "Gold: "
 script = SubResource("GDScript_2co4l")
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_ssbkr")]
+process_mode = 2
+
+[node name="MenuButton" type="Button" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -171.0
+offset_top = 21.0
+offset_right = -26.0
+offset_bottom = 99.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 26
+text = "Menu"
 
 [node name="Collectibles" type="Node2D" parent="."]
 script = SubResource("GDScript_s0wp7")
@@ -1417,6 +1440,7 @@ texture = ExtResource("11_ivukq")
 occluder = SubResource("OccluderPolygon2D_xvg58")
 
 [node name="Inventory" parent="." instance=ExtResource("12_j5j2b")]
+layer = 2
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
@@ -1442,5 +1466,10 @@ texture_progress = ExtResource("13_cb5x2")
 [connection signal="timeout" from="Mobs/Spawner_ventoss" to="." method="_on_spawner_ventoss_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_dragon" to="." method="_on_spawner_dragon_timeout"]
 [connection signal="health_changed" from="Seeker/Seeker" to="." method="_on_seeker_health_changed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Resume" to="Pause" method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Quit" to="Pause" method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuButton" to="Pause" method="_on_menu_button_pressed"]
 [connection signal="timeout" from="Collectibles/Timer" to="Collectibles" method="_on_timer_timeout"]
 [connection signal="timeout" from="DayNight" to="." method="_on_day_night_timeout"]
+
+[editable path="CanvasLayer/PauseMenu"]

@@ -19,3 +19,4 @@ res://UI/invent_item.tscn
 res://scn/DamageBox/damage_box.tscn
 res://UI/inventory_slot.tscn
 res://UI/item_machine.tscn
+res://UI/pause_menu.tscn

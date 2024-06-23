@@ -30,7 +30,7 @@ func _ready():
 	light.enabled = true
 	
 	for i in range(100):
-		var num = randi_range(1, 10)
+		var num = randi_range(1, 30)
 		var new_item = ItemMachine.generate_item(str(num))
 		$Items.add_child(new_item)
 		new_item.position = Vector2(randi_range(-1000, 1100), 570)
