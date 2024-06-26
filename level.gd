@@ -29,9 +29,35 @@ func _ready():
 	health_bar.value = health_bar.max_value
 	light.enabled = true
 	
-	for i in range(100):
-		var num = randi_range(1, 30)
-		var new_item = ItemMachine.generate_item(str(num))
+	
+	for i in range(10):
+		var new_item = ItemMachine.generate_item("135")
+		$Items.add_child(new_item)
+		new_item.position = Vector2(randi_range(-1000, 1100), 570)
+		new_item = ItemMachine.generate_item("115")
+		$Items.add_child(new_item)
+		new_item.position = Vector2(randi_range(-1000, 1100), 570)
+		new_item = ItemMachine.generate_item("125")
+		$Items.add_child(new_item)
+		new_item.position = Vector2(randi_range(-1000, 1100), 570)
+		
+	for i in range(3):
+		var new_item = ItemMachine.generate_item("1")
+		$Items.add_child(new_item)
+		new_item.position = Vector2(randi_range(-1000, 1100), 570)
+	
+	for i in range(3):
+		var new_item = ItemMachine.generate_item("2")
+		$Items.add_child(new_item)
+		new_item.position = Vector2(randi_range(-1000, 1100), 570)
+
+	for i in range(3):
+		var new_item = ItemMachine.generate_item("4")
+		$Items.add_child(new_item)
+		new_item.position = Vector2(randi_range(-1000, 1100), 570)
+	
+	for i in range(3):
+		var new_item = ItemMachine.generate_item("7")
 		$Items.add_child(new_item)
 		new_item.position = Vector2(randi_range(-1000, 1100), 570)
 

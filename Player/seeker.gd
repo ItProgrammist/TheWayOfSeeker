@@ -38,6 +38,7 @@ var run_speed = 1
 var combo = false
 var attack_cooldown = false
 var inventory
+var jump = 1
 
 
 var regex_enemi = RegEx.new()
@@ -68,7 +69,11 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		if Global.jump:
+			jump = 1.5
+		else:
+			jump = 1
+		velocity.y = JUMP_VELOCITY * jump
 		anim_player.play("Jump")	
 			
 	if health <= 0:
@@ -101,6 +106,24 @@ func drop_item(link):
 func update_inventory():
 	ui.update_inventory(inventory)
 
+func increase_hp(val):
+	self.health = min(self.health + val, self.max_health)
+	emit_signal("health_changed", health)
+
+func increase_speed():
+	Global.run_speed = true
+	$"../Timer_speed".start()
+
+func _on_timer_speed_timeout():
+	Global.run_speed = false
+
+func increase_jump():
+	Global.jump = true
+	$"../Timer_jump".start()
+
+func _on_timer_jump_timeout():
+	Global.jump = false
+
 func move_state():
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
@@ -118,7 +141,10 @@ func move_state():
 	if Input.is_action_pressed("run"):
 		run_speed = 2
 	else:
-		run_speed = 1
+		if Global.run_speed == true:
+			run_speed = 2.5
+		else:
+			run_speed = 1
 	if Input.is_action_just_pressed("attack") and attack_cooldown == false:
 		state = ATTACK1
 		
@@ -172,3 +198,4 @@ func _on_damage_recieved(enemy_damage):
 	emit_signal("health_changed", health)
 	state = DAMAGE
 	
+

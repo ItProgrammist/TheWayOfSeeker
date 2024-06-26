@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=25 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_g5g0l"]
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
@@ -13,6 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://bqt15y2sofmg3" path="res://Mobs/anubis/anubis.tscn" id="11_m48rj"]
 [ext_resource type="PackedScene" uid="uid://dvvk20we6t4tr" path="res://UI/inventory.tscn" id="12_j5j2b"]
 [ext_resource type="Texture2D" uid="uid://b44rcpphpgc8d" path="res://Health Bar Asset Pack 2 by Adwit Rahman/greenbar (2).png" id="13_cb5x2"]
+[ext_resource type="Texture2D" uid="uid://buwhx5ho6prgw" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/helm.png" id="14_hte7x"]
+[ext_resource type="Script" path="res://UI/Armor.gd" id="14_yl6jq"]
+[ext_resource type="Texture2D" uid="uid://btjo3lchuvvum" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/armour.png" id="15_hh3t4"]
+[ext_resource type="Texture2D" uid="uid://b316cxejoo8gq" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/boot.png" id="16_7q0xq"]
+[ext_resource type="Texture2D" uid="uid://sld2ec7fddix" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/brown slot.png" id="17_8wg2g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnvtf"]
 texture = ExtResource("5_ldgb2")
@@ -1365,6 +1370,16 @@ autostart = true
 [node name="Seeker" parent="Seeker" instance=ExtResource("1_lcq2p")]
 position = Vector2(156, 564)
 
+[node name="Timer_speed" type="Timer" parent="Seeker"]
+process_callback = 0
+wait_time = 20.0
+one_shot = true
+
+[node name="Timer_jump" type="Timer" parent="Seeker"]
+process_callback = 0
+wait_time = 20.0
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
 
@@ -1459,6 +1474,54 @@ value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("13_cb5x2")
 
+[node name="Armor" type="Control" parent="CanvasLayer2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 26.0
+offset_top = 153.0
+offset_right = 121.0
+offset_bottom = 415.0
+script = ExtResource("14_yl6jq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/Armor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="helm" type="TextureRect" parent="CanvasLayer2/Armor/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("14_hte7x")
+expand_mode = 1
+
+[node name="armour" type="TextureRect" parent="CanvasLayer2/Armor/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("15_hh3t4")
+expand_mode = 1
+
+[node name="boot" type="TextureRect" parent="CanvasLayer2/Armor/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("16_7q0xq")
+expand_mode = 1
+
+[node name="weapon" type="TextureRect" parent="CanvasLayer2/Armor/VBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("17_8wg2g")
+expand_mode = 1
+
 [connection signal="timeout" from="Mobs/Spawner_skeleton" to="." method="_on_spawner_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_golem" to="." method="_on_spawner_golem_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_bat" to="." method="_on_spawner_bat_timeout"]
@@ -1466,6 +1529,8 @@ texture_progress = ExtResource("13_cb5x2")
 [connection signal="timeout" from="Mobs/Spawner_ventoss" to="." method="_on_spawner_ventoss_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_dragon" to="." method="_on_spawner_dragon_timeout"]
 [connection signal="health_changed" from="Seeker/Seeker" to="." method="_on_seeker_health_changed"]
+[connection signal="timeout" from="Seeker/Timer_speed" to="Seeker/Seeker" method="_on_timer_speed_timeout"]
+[connection signal="timeout" from="Seeker/Timer_jump" to="Seeker/Seeker" method="_on_timer_jump_timeout"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Resume" to="Pause" method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Quit" to="Pause" method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="Pause" method="_on_menu_button_pressed"]
