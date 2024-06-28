@@ -1,3 +1,5 @@
+res://UI
+res://Collectibles
 <<<<<<< HEAD
 =======
 res://Portal
@@ -8,7 +10,6 @@ res://Animated Sideview Battlers/Golem Ort
 res://Players_Frames/Adventurer-1/Individual Sprites
 res://Players_Frames/Adventurer-1
 res://Player
-res://UI
 res://oak_woods_v1.0
 res://Build
 res://oak_woods_v1.0/decorations
@@ -19,6 +20,3 @@ res://Animated Sideview Battlers/Minotaur Beef
 res://Animated Sideview Battlers/Dragon Demios
 res://Animated Sideview Battlers/Ventoss
 res://Mobs/dragon
-res://Mobs/ventoss
-res://Mobs/minotaur_beef
-res://Mobs/anubis

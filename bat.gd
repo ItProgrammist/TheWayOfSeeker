@@ -12,6 +12,7 @@ enum {
 #@onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 @onready var sprite = $AnimatedSprite2D
+@onready var world = get_viewport().get_node("Level")
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var seeker = Vector2.ZERO
@@ -62,6 +63,7 @@ func _physics_process(delta):
 	
 	if health <= 0:
 		Global.count_bat -= 1
+		#Signals.emit_signal("enemy_died", position)
 		animPlayer.play(("Death"))
 		await animPlayer.animation_finished
 		queue_free()
@@ -103,6 +105,7 @@ func _on_attack_body_entered(body):
 
 func death():
 	Global.count_bat -= 1
+	Signals.emit_signal("enemy_died", position)
 	velocity.x = 0	
 	speed = 0
 	animPlayer.play(("Death"))
@@ -149,6 +152,7 @@ func damage_state():
 
 func death_state():
 	Global.count_bat -= 1
+	#Signals.emit_signal("enemy_died", position)
 	animPlayer.play("Death")
 	await animPlayer.animation_finished
 	queue_free()

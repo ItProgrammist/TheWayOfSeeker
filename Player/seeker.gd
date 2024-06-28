@@ -27,6 +27,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var pre_inv = preload("res://UI/invent.tscn")
 @onready var pre_item = preload("res://UI/invent_item.tscn")
 @onready var world = get_viewport().get_node("Level")
+@onready var shop = get_viewport().get_node("Level/Shop2")
+
 
 var seeker_pos
 var armor_index = 1.0
@@ -105,6 +107,9 @@ func pick(item):
 func _unhandled_input(event):
 	if event.is_action_pressed("inventory"):
 		ui.toggle_inventory(inventory)
+	if event.is_action_pressed("shop") and (position.x > 950 and position.x < 1050):
+		shop.visible = !shop.visible
+		
 
 func create_inventory():
 	inventory = pre_inv.instantiate()
@@ -233,6 +238,13 @@ func death_state():
 	Global.run_speed = false
 	Global.jump = false
 	Global.day_count = 0;
+	Global.count_bat = 0
+	Global.count_skeleton = 0
+	Global.count_minotaur = 0
+	Global.count_golem = 0
+	Global.count_ventoss = 0
+	Global.count_dragon = 0
+	Global.count_anubis = 0
 	anim.play("Death")
 	await get_tree().create_timer(0.7).timeout
 	queue_free()

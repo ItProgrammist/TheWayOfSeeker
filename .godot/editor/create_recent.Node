@@ -1,30 +1,14 @@
-<<<<<<< HEAD
-AnimationPlayer
-Timer
+Button
+Label
 TextureRect
 VBoxContainer
+HBoxContainer
+PanelContainer
 Control
-Button
-Node
-Label
-Panel
-TextureProgressBar
 CanvasLayer
-Node2D
-CollisionShape2D
-Area2D
-=======
+AnimationPlayer
 Timer
 Node
-AnimatedSprite2D
-CharacterBody2D
-TextureRect
-VBoxContainer
-Control
-Button
-Label
 Panel
 TextureProgressBar
-AnimationPlayer
-AnimationPlayer
->>>>>>> 7aa1f20 (spawn)
+Node2D

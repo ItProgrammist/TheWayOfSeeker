@@ -33,42 +33,20 @@ func _ready():
 	light.enabled = true
 	Global.day_count = 0
 	
+	#for i in range(3):
+		#var new_item = ItemMachine.generate_item("1")
+		#$Items.add_child(new_item)
+		#new_item.position = Vector2(randi_range(-1000, 1100), 570)
 	
-	for i in range(10):
-		var new_item = ItemMachine.generate_item("135")
-		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
-		new_item = ItemMachine.generate_item("115")
-		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
-		new_item = ItemMachine.generate_item("125")
-		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
-		
-	for i in range(3):
-		var new_item = ItemMachine.generate_item("1")
-		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
-	
-	for i in range(3):
-		var new_item = ItemMachine.generate_item("2")
-		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
 
-	for i in range(3):
-		var new_item = ItemMachine.generate_item("4")
-		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
-	
-	for i in range(3):
-		var new_item = ItemMachine.generate_item("7")
-		$Items.add_child(new_item)
-		new_item.position = Vector2(randi_range(-1000, 1100), 570)
 
 func add_lying_item(i, x, y):
 	var new_item = ItemMachine.generate_item(i.get_item_name(), i.get_amount())
 	$Items.add_child(new_item)
 	new_item.position = Vector2(x, y)
+	
+func spawn_gold_coin(pos):
+	$Collectibles.coin_spawn(pos)
 
 func get_seeker():
 	return $Seeker/Seeker

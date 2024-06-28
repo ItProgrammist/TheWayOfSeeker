@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=26 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_g5g0l"]
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
@@ -8,10 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://buog20gu36iqu" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_8tqyp"]
 [ext_resource type="Texture2D" uid="uid://cceybwyswr8ku" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_ldgb2"]
 [ext_resource type="PackedScene" uid="uid://dkb00dhnq7atx" path="res://Build/shop.tscn" id="5_tmf5r"]
+[ext_resource type="Script" path="res://Build/shop.gd" id="7_ejmqa"]
 [ext_resource type="PackedScene" uid="uid://d0d3ei5ncwuqf" path="res://UI/pause_menu.tscn" id="9_ssbkr"]
+[ext_resource type="Script" path="res://Collectibles/Collectibles.gd" id="10_kvrbn"]
 [ext_resource type="Texture2D" uid="uid://bjoy7fw0fiudv" path="res://oak_woods_v1.0/decorations/circle.png" id="11_ivukq"]
 [ext_resource type="PackedScene" uid="uid://dvvk20we6t4tr" path="res://UI/inventory.tscn" id="12_j5j2b"]
 [ext_resource type="Texture2D" uid="uid://b44rcpphpgc8d" path="res://Health Bar Asset Pack 2 by Adwit Rahman/greenbar (2).png" id="13_cb5x2"]
+[ext_resource type="PackedScene" uid="uid://c53vrr7uc3ujw" path="res://UI/shop_2.tscn" id="13_r4rxj"]
 [ext_resource type="Texture2D" uid="uid://buwhx5ho6prgw" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/helm.png" id="14_hte7x"]
 [ext_resource type="Script" path="res://UI/Armor.gd" id="14_yl6jq"]
 [ext_resource type="Texture2D" uid="uid://btjo3lchuvvum" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/armour.png" id="15_hh3t4"]
@@ -1271,19 +1274,6 @@ func _process(_delta):
 	text = \"Gold: \" + str($\"../../Seeker/Seeker\".gold)
 "
 
-[sub_resource type="GDScript" id="GDScript_s0wp7"]
-script/source = "extends Node2D
-
-var gold = preload(\"res://Collectibles/gold_coin.tscn\")
-
-func _on_timer_timeout():
-	var goldTemp = gold.instantiate()
-	#var rng = RandomNumberGenerator.new()
-	var randint = randi_range(50, 1050)
-	goldTemp.position = Vector2(randint, 565)
-	add_child(goldTemp)
-"
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvg58"]
 polygon = PackedVector2Array(-1907, 586, -1907, 659, 3843, 659, 3843, 587, 3699.06, 586.975)
 
@@ -1325,6 +1315,7 @@ texture = ExtResource("4_8tqyp")
 
 [node name="Shop" parent="." instance=ExtResource("5_tmf5r")]
 position = Vector2(1014, 544)
+script = ExtResource("7_ejmqa")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
@@ -1358,7 +1349,7 @@ wait_time = 15.0
 wait_time = 19.0
 
 [node name="Spawner_anubis" type="Timer" parent="Mobs"]
-wait_time = 2.0
+wait_time = 19.0
 
 [node name="Seeker" type="Node2D" parent="."]
 
@@ -1413,10 +1404,10 @@ theme_override_font_sizes/font_size = 26
 text = "Menu"
 
 [node name="Collectibles" type="Node2D" parent="."]
-script = SubResource("GDScript_s0wp7")
+script = ExtResource("10_kvrbn")
 
 [node name="Timer" type="Timer" parent="Collectibles"]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true
 
 [node name="Effects" type="Node2D" parent="."]
@@ -1451,6 +1442,10 @@ occluder = SubResource("OccluderPolygon2D_xvg58")
 
 [node name="Inventory" parent="." instance=ExtResource("12_j5j2b")]
 layer = 2
+
+[node name="Shop2" parent="." instance=ExtResource("13_r4rxj")]
+layer = 2
+visible = false
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
@@ -1523,6 +1518,7 @@ expand_mode = 1
 [connection signal="timeout" from="Mobs/Spawner_minotaur" to="." method="_on_spawner_minotaur_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_ventoss" to="." method="_on_spawner_ventoss_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_dragon" to="." method="_on_spawner_dragon_timeout"]
+[connection signal="timeout" from="Mobs/Spawner_anubis" to="." method="_on_spawner_anubis_timeout"]
 [connection signal="health_changed" from="Seeker/Seeker" to="." method="_on_seeker_health_changed"]
 [connection signal="timeout" from="Seeker/Timer_speed" to="Seeker/Seeker" method="_on_timer_speed_timeout"]
 [connection signal="timeout" from="Seeker/Timer_jump" to="Seeker/Seeker" method="_on_timer_jump_timeout"]

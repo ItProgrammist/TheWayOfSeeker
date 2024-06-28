@@ -18,3 +18,5 @@ var weapon_load = false
 
 var finish_portal = false
 var day_count = 0
+
+var sig = 0
