@@ -230,6 +230,9 @@ func slide_state():
 
 func death_state():
 	velocity.x = 0
+	Global.run_speed = false
+	Global.jump = false
+	Global.day_count = 0;
 	anim.play("Death")
 	await get_tree().create_timer(0.7).timeout
 	queue_free()

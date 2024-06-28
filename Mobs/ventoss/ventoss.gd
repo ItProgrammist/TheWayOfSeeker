@@ -61,6 +61,7 @@ func _physics_process(delta):
 	velocity.x = direction.x * speed
 	
 	if health <= 0:
+		Global.count_ventoss -= 1
 		animPlayer.play(("Death"))
 		await animPlayer.animation_finished
 		queue_free()
@@ -103,6 +104,7 @@ func _on_attack_body_entered(body):
 func death():
 	velocity.x = 0	
 	speed = 0
+	Global.count_ventoss -= 1
 	animPlayer.play(("Death"))
 	await animPlayer.animation_finished
 	queue_free()
@@ -146,6 +148,7 @@ func damage_state():
 	state = DEFAULT
 
 func death_state():
+	Global.count_ventoss -= 1
 	animPlayer.play("Death")
 	await animPlayer.animation_finished
 	queue_free()

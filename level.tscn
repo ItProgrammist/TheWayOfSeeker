@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=24 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_g5g0l"]
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dkb00dhnq7atx" path="res://Build/shop.tscn" id="5_tmf5r"]
 [ext_resource type="PackedScene" uid="uid://d0d3ei5ncwuqf" path="res://UI/pause_menu.tscn" id="9_ssbkr"]
 [ext_resource type="Texture2D" uid="uid://bjoy7fw0fiudv" path="res://oak_woods_v1.0/decorations/circle.png" id="11_ivukq"]
-[ext_resource type="PackedScene" uid="uid://bqt15y2sofmg3" path="res://Mobs/anubis/anubis.tscn" id="11_m48rj"]
 [ext_resource type="PackedScene" uid="uid://dvvk20we6t4tr" path="res://UI/inventory.tscn" id="12_j5j2b"]
 [ext_resource type="Texture2D" uid="uid://b44rcpphpgc8d" path="res://Health Bar Asset Pack 2 by Adwit Rahman/greenbar (2).png" id="13_cb5x2"]
 [ext_resource type="Texture2D" uid="uid://buwhx5ho6prgw" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/helm.png" id="14_hte7x"]
@@ -1336,34 +1335,30 @@ layer_0/tile_data = PackedInt32Array(2359296, 65536, 0, 2359297, 131072, 0, 2359
 
 [node name="Items" type="Node2D" parent="."]
 
+[node name="Portal" type="Node" parent="."]
+
 [node name="Mobs" type="Node2D" parent="."]
 
-[node name="anubis" parent="Mobs" instance=ExtResource("11_m48rj")]
-position = Vector2(1485, 564)
-
 [node name="Spawner_skeleton" type="Timer" parent="Mobs"]
-wait_time = 10.0
-autostart = true
+wait_time = 15.0
 
 [node name="Spawner_golem" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 19.0
 
 [node name="Spawner_bat" type="Timer" parent="Mobs"]
 wait_time = 15.0
-autostart = true
 
 [node name="Spawner_minotaur" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 19.0
 
 [node name="Spawner_ventoss" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 15.0
 
 [node name="Spawner_dragon" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 19.0
+
+[node name="Spawner_anubis" type="Timer" parent="Mobs"]
+wait_time = 2.0
 
 [node name="Seeker" type="Node2D" parent="."]
 
