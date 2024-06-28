@@ -3,16 +3,15 @@ extends Node
 @onready var item = preload("res://UI/item.tscn")
 
 var items = {
-	"1" : ["1", 8, {"can_stack" : true}],
-	"2" : ["2", 8, {"can_stack" : true}],
-	"3" : ["3", 8, {"can_stack" : true}],
-	"4" : ["4", 8, {"can_stack" : true}],
-	"5" : ["5", 8, {"can_stack" : true}],
-	"6" : ["6", 8, {"can_stack" : true}],
-	"7" : ["7", 8, {"can_stack" : true}],
-	"8" : ["8", 8, {"can_stack" : true}],
-	"9" : ["9", 8, {"can_stack" : true}],
-	"10" : ["10", 8, {"can_stack" : true}],
+	"1" : ["1", 8, {"can_stack" : true, "function" : "put_on"}],
+	"2" : ["2", 8, {"can_stack" : true, "function" : "put_on"}],
+	"4" : ["4", 8, {"can_stack" : true, "function" : "put_on"}],
+	"5" : ["5", 8, {"can_stack" : true, "function" : "put_on"}],
+	"7" : ["7", 8, {"can_stack" : true, "function" : "put_on"}],
+	"27" : ["27", 8, {"can_stack" : true}],
+	"125" : ["125", 8, {"can_stack" : true, "function": "jump", "expandable": true, "exp_rate": 1}],
+	"115" : ["115", 8, {"can_stack" : true, "function": "speed", "expandable": true, "exp_rate": 1}],
+	"135" : ["135", 8, {"can_stack" : true, "function": "heal", "heal_val": 10, "expandable": true, "exp_rate": 1}],
 }
 
 func has_item(item_name):

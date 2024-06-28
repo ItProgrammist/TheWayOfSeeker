@@ -1,5 +1,5 @@
-res://menu.tscn
 res://level.tscn
+res://menu.tscn
 res://bg.tscn
 res://Player/seeker.tscn
 res://Mobs/skeleton/skeleton.tscn
@@ -19,3 +19,16 @@ res://UI/invent_item.tscn
 res://scn/DamageBox/damage_box.tscn
 res://UI/inventory_slot.tscn
 res://UI/item_machine.tscn
+res://UI/pause_menu.tscn
+res://Player/seeker.gd
+res://Mobs/skeleton/skeleton.gd
+res://scn/signals.gd
+res://Mobs/fire_golem/fire_golem.gd
+res://UI/Armor.gd
+res://Pause.gd
+res://scn/DamageBox/damage_box.gd
+res://Mobs/anubis/anubis.gd
+res://bat.gd
+res://Mobs/minotaur_beef/minotaur_beef.gd
+res://Mobs/ventoss/ventoss.gd
+res://Mobs/dragon/dragon.gd

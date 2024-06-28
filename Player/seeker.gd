@@ -8,7 +8,9 @@ enum{
 	ATTACK2,
 	ATTACK3,
 	DAMAGE,
-	DEATH
+	DEATH,
+	BLOCK,
+	SLIDE
 }
 
 const SPEED = 150.0
@@ -38,16 +40,23 @@ var run_speed = 1
 var combo = false
 var attack_cooldown = false
 var inventory
-
+var jump = 1
+var direction
+var damage_base = 30
+var damage_coeff = 1
+var damage_curr
 
 var regex_enemi = RegEx.new()
-	
+
 func _ready():
 	create_inventory()
 	Signals.connect("enemy_attack", Callable(self, "_on_damage_recieved"))
+	#Signals.connect("enemy_position_update", Callable(self, "_on_enemy_position_update"))		
 	health = max_health
 
 func _physics_process(delta):
+	
+	damage_curr = damage_base * damage_coeff
 	
 	match state:
 		MOVE:
@@ -62,13 +71,21 @@ func _physics_process(delta):
 			damage_state()
 		DEATH:
 			death_state()
+		BLOCK:
+			block_state()
+		SLIDE:
+			slide_state()
 	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		if Global.jump:
+			jump = 1.5
+		else:
+			jump = 1
+		velocity.y = JUMP_VELOCITY * jump
 		anim_player.play("Jump")	
 			
 	if health <= 0:
@@ -101,28 +118,65 @@ func drop_item(link):
 func update_inventory():
 	ui.update_inventory(inventory)
 
+func increase_hp(val):
+	self.health = min(self.health + val, self.max_health)
+	emit_signal("health_changed", health)
+
+func increase_speed():
+	Global.run_speed = true
+	$"../Timer_speed".start()
+
+func _on_timer_speed_timeout():
+	Global.run_speed = false
+
+func increase_jump():
+	Global.jump = true
+	$"../Timer_jump".start()
+
+func _on_timer_jump_timeout():
+	Global.jump = false
+
 func move_state():
 	var direction = Input.get_axis("ui_left", "ui_right")
+	
 	if direction:
 		velocity.x = direction * SPEED * run_speed
 		if velocity.y == 0:
 			anim_player.play("Run")
+			
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:	
 			anim_player.play("default")
+			
 	if direction == -1:
 		anim.flip_h = true
+		$AttackDirection.rotation_degrees = 205
+		
 	elif direction == 1:
 		anim.flip_h = false
-	if Input.is_action_pressed("run"):
+		$AttackDirection.rotation_degrees = 0
+		
+	if Input.is_action_pressed("run") and Global.run_speed == false:
 		run_speed = 2
+		
 	else:
-		run_speed = 1
+		if Global.run_speed == true:
+			run_speed = 2.5
+		else:
+			run_speed = 1
+			
 	if Input.is_action_just_pressed("attack") and attack_cooldown == false:
 		state = ATTACK1
 		
+	if Input.is_action_pressed("block"):
+		state = BLOCK
+	
+	if Input.is_action_just_pressed("slide") and velocity.x != 0:
+		state = SLIDE
+		
 func classic_attack():
+	damage_coeff = 1
 	if Input.is_action_just_pressed("attack") and combo == true:
 		state = ATTACK2
 	velocity.x = 0
@@ -132,6 +186,7 @@ func classic_attack():
 	state = MOVE
 
 func combo_attack():
+	damage_coeff = 1.2
 	if Input.is_action_just_pressed("attack") and combo == true:
 		state = ATTACK3
 	anim_player.play("Attack2")
@@ -139,6 +194,7 @@ func combo_attack():
 	state = MOVE
 
 func combo_attack2():
+	damage_coeff = 2
 	anim_player.play("Attack3")
 	await anim_player.animation_finished
 	state = MOVE
@@ -159,6 +215,19 @@ func damage_state():
 	#await anim.animation_finished
 	state = MOVE
 
+func block_state():
+	velocity.x = 0
+	velocity.y = 0
+	anim_player.play("Block")
+	if !(Input.is_action_pressed("block")):
+		state = MOVE
+
+func slide_state():
+	velocity.y = 0
+	anim_player.play("Slide")
+	await anim_player.animation_finished
+	state = MOVE
+
 func death_state():
 	velocity.x = 0
 	anim.play("Death")
@@ -167,8 +236,17 @@ func death_state():
 	#get_tree().change_scene_to_file("res://menu.tscn")
 	get_tree().change_scene_to_file.bind("res://menu.tscn").call_deferred()
 
-func _on_damage_recieved(enemy_damage):
-	health -= enemy_damage
-	emit_signal("health_changed", health)
-	state = DAMAGE
-	
+func _on_damage_recieved(enemy_damage, enemy_pos):
+	direction = abs(enemy_pos - self.position)
+	if state == BLOCK:
+			enemy_damage /= 2
+	elif state == SLIDE:
+		enemy_damage = 0
+	if direction.x <= 100:
+		health -= enemy_damage
+		emit_signal("health_changed", health)
+		state = DAMAGE
+
+
+func _on_hit_box_area_entered(area):
+	Signals.emit_signal("player_attack", damage_curr, self.position)

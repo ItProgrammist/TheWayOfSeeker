@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var chase = false
+var chase1 = false
 var speed = 100
 var health = 60
 
@@ -20,7 +20,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	var direction = (seeker.position - self.position).normalized()
 	if alive and seeker_is_damaged == false and health > 0:
-		if chase == true:
+		if chase1 == true:
 			velocity.x = direction.x * speed
 			anim.play("Run")
 		
@@ -42,14 +42,14 @@ func _physics_process(delta):
 
 func _on_detector_body_entered(body):
 	if body.name == "Seeker":
-		chase = true
+		chase1 = true
 		
 
 
 
 func _on_detector_body_exited(body):
 	if body.name == "Seeker":
-		chase = false
+		chase1 = false
 
 
 func _on_death_body_entered(body):

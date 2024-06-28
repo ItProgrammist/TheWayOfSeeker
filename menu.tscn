@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://0y3hith31olj"]
+[gd_scene load_steps=6 format=3 uid="uid://0y3hith31olj"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_eeisu"]
-[ext_resource type="PackedScene" uid="uid://bmidbtewc80ew" path="res://bg.tscn" id="2_md0gf"]
+[ext_resource type="Texture2D" uid="uid://cnhed0qprwxhc" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_pewsx"]
+[ext_resource type="Texture2D" uid="uid://b6rxhh5tmn2ma" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_ce43r"]
+[ext_resource type="Texture2D" uid="uid://buog20gu36iqu" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_w1xa8"]
+
+[sub_resource type="GDScript" id="GDScript_ymso5"]
+script/source = "extends ParallaxBackground
+
+var speed = 100
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	scroll_offset.x -= speed * delta
+"
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_eeisu")
@@ -22,7 +34,35 @@ offset_bottom = 490.0
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 
-[node name="BG" parent="." instance=ExtResource("2_md0gf")]
+[node name="BG" type="ParallaxBackground" parent="."]
+layer = -1
+script = SubResource("GDScript_ymso5")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(1153, 2.08165e-12)
+
+[node name="BackgroundLayer1" type="Sprite2D" parent="BG/ParallaxLayer"]
+position = Vector2(1281.89, 705)
+scale = Vector2(8.01184, 7.83334)
+texture = ExtResource("2_pewsx")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(1157, 2.08165e-12)
+
+[node name="BackgroundLayer2" type="Sprite2D" parent="BG/ParallaxLayer2"]
+position = Vector2(1281, 708)
+scale = Vector2(8, 7.85556)
+texture = ExtResource("3_ce43r")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="BG"]
+motion_mirroring = Vector2(1164.4, 2.08165e-12)
+
+[node name="BackgroundLayer3" type="Sprite2D" parent="BG/ParallaxLayer3"]
+position = Vector2(1275.67, 694.5)
+scale = Vector2(7.99444, 7.99444)
+texture = ExtResource("4_w1xa8")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
