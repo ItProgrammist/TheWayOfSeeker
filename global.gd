@@ -20,3 +20,7 @@ var finish_portal = false
 var day_count = 0
 
 var sig = 0
+
+var helm_hp = true
+var armour_hp = true
+var boot_hp = true

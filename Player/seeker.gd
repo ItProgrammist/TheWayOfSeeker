@@ -55,10 +55,23 @@ func _ready():
 	Signals.connect("enemy_attack", Callable(self, "_on_damage_recieved"))
 	#Signals.connect("enemy_position_update", Callable(self, "_on_enemy_position_update"))		
 	health = max_health
+	Global.run_speed = false
+	Global.jump = false
+	Global.day_count = 0;
+	Global.count_bat = 0
+	Global.count_skeleton = 0
+	Global.count_minotaur = 0
+	Global.count_golem = 0
+	Global.count_ventoss = 0
+	Global.count_dragon = 0
+	Global.count_anubis = 0
+	armor_index = 1
+	damage_coeff = 1
 
 func _physics_process(delta):
 	
 	damage_curr = damage_base * damage_coeff
+	max_health = 100 * armor_index
 	
 	match state:
 		MOVE:
@@ -245,6 +258,8 @@ func death_state():
 	Global.count_ventoss = 0
 	Global.count_dragon = 0
 	Global.count_anubis = 0
+	armor_index = 1
+	damage_coeff = 1
 	anim.play("Death")
 	await get_tree().create_timer(0.7).timeout
 	queue_free()

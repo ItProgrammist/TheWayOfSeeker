@@ -94,7 +94,9 @@ func _on_spawner_timeout():
 func skeleton_spawn():
 	if state == EVENING:
 		var skeleton = skeleton_preload.instantiate()
-		skeleton.position = Vector2 (-1000, 570)
+		var num = randi_range(0, 2)
+		var pos = [-1000, 2000, 3000]
+		skeleton.position = Vector2 (pos[num], 570)
 		$Mobs.add_child(skeleton)
 
 
@@ -131,31 +133,41 @@ func _on_spawner_dragon_timeout():
 func bat_spawn():
 	if state == EVENING:
 		var bat = bat_preload.instantiate()
-		bat.position = Vector2 (-1000, 570)
+		var num = randi_range(0, 2)
+		var pos = [-1000, 2000, 3000]
+		bat.position = Vector2 (pos[num], 570)
 		$Mobs.add_child(bat)
 
 func golem_spawn():
 	if state == EVENING:
 		var golem = golem_preload.instantiate()
-		golem.position = Vector2 (-1000, 570)
+		var num = randi_range(0, 2)
+		var pos = [-1000, 2000, 3000]
+		golem.position = Vector2 (pos[num], 570)
 		$Mobs.add_child(golem)
 
 func ventoss_spawn():
 	if state == EVENING:
 		var ventoss = ventoss_preload.instantiate()
-		ventoss.position = Vector2 (-1000, 570)
+		var num = randi_range(0, 2)
+		var pos = [-1000, 2000, 3000]
+		ventoss.position = Vector2 (pos[num], 570)
 		$Mobs.add_child(ventoss)
 
 func minotaur_spawn():
 	if state == EVENING:
 		var minotaur = minotaur_preload.instantiate()
-		minotaur.position = Vector2 (-1000, 570)
+		var num = randi_range(0, 2)
+		var pos = [-1000, 2000, 3000]
+		minotaur.position = Vector2 (pos[num], 570)
 		$Mobs.add_child(minotaur)
 
 func dragon_spawn():
 	if state == EVENING:
 		var dragon = dragon_preload.instantiate()
-		dragon.position = Vector2 (-1000, 570)
+		var num = randi_range(0, 2)
+		var pos = [-1000, 2000, 3000]
+		dragon.position = Vector2 (pos[num], 570)
 		$Mobs.add_child(dragon)
 
 
@@ -172,16 +184,28 @@ func _on_spawner_anubis_timeout():
 func anubis_spawn():
 	if state == EVENING:
 		var anubis = anubis_preload.instantiate()
-		anubis.position = Vector2 (-1000, 570)
+		var num = randi_range(0, 2)
+		var pos = [-1000, 2000, 3000]
+		anubis.position = Vector2 (pos[num], 570)
 		$Mobs.add_child(anubis)
 		
 func spawn_mobs():
 	
 	Global.day_count += 1
 	Global.finish_portal = false
-	var portal = portal_preload.instantiate()
-	portal.position = Vector2 (-1000, 550)
-	$Portal.add_child(portal)
+	var portal1 = portal_preload.instantiate()
+	var portal2 = portal_preload.instantiate()
+	var portal3 = portal_preload.instantiate()
+	
+	
+	portal1.position = Vector2 (-1000, 550)
+	$Portal.add_child(portal1)
+	
+	portal2.position = Vector2 (2000, 550)
+	$Portal.add_child(portal2)
+	
+	portal3.position = Vector2 (3000, 550)
+	$Portal.add_child(portal3)
 		
 	if Global.day_count == 1:
 		$Mobs/Spawner_bat.start()

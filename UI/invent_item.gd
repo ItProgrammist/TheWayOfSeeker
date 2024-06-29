@@ -10,6 +10,7 @@ var inventory = null
 @onready var armour = get_viewport().get_node("Level/CanvasLayer2/Armor/VBoxContainer/armour")
 @onready var boot = get_viewport().get_node("Level/CanvasLayer2/Armor/VBoxContainer/boot")
 @onready var weapon = get_viewport().get_node("Level/CanvasLayer2/Armor/VBoxContainer/weapon")
+@onready var seeker = get_viewport().get_node("Level/Seeker/Seeker")
 
 func set_item(item_name, amount, props):
 	self.item_name = item_name
@@ -60,18 +61,22 @@ func _on_drop_pressed():
 	inventory.get_inv_owner().drop_item(self)
 	if item_name == "1":
 		helm.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/helm.png")
+		seeker.armor_index -= 0.3
 		Global.helm_load = false
 						
 	if item_name == "2":
 		armour.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/armour.png")
+		seeker.armor_index -= 0.5
 		Global.armour_load = false
 						
 	if item_name == "4":
 		boot.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/boot.png")
+		seeker.armor_index -= 0.2
 		Global.boot_load = false
 						
 	if item_name == "5" or item_name == "7":
 		weapon.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/brown slot.png")
+		seeker.damage_coeff -= 0.5
 		Global.weapon_load = false
 
 
@@ -87,33 +92,41 @@ func _on_use_pressed():
 				if item_name == "1":
 					if Global.helm_load == false:
 						helm.texture = load("res://UI/item_sheet.png/1.png")
+						seeker.armor_index += 0.3	
 						Global.helm_load = true
 					else:
 						helm.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/helm.png")
+						seeker.armor_index -= 0.3
 						Global.helm_load = false
 						
 				if item_name == "2":
 					if Global.armour_load == false:
 						armour.texture = load("res://UI/item_sheet.png/2.png")
+						seeker.armor_index += 0.5
 						Global.armour_load = true
 					else:
 						armour.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/armour.png")
+						seeker.armor_index -= 0.5
 						Global.armour_load = false
 						
 				if item_name == "4":
 					if Global.boot_load == false:
 						boot.texture = load("res://UI/item_sheet.png/4.png")
+						seeker.armor_index += 0.2
 						Global.boot_load = true
 					else:
 						boot.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/boot.png")
+						seeker.armor_index -= 0.2
 						Global.boot_load = false
 						
 				if item_name == "5" or item_name == "7":
 					if Global.weapon_load == false:
 						weapon.texture = load("res://UI/item_sheet.png/%s.png" % item_name)
+						seeker.damage_coeff += 0.5
 						Global.weapon_load = true
 					else:
 						weapon.texture = load("res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/brown slot.png")
+						seeker.damage_coeff -= 0.5
 						Global.weapon_load = false
 						
 			"speed":
