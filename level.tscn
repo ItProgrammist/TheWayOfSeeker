@@ -1274,21 +1274,6 @@ func _process(_delta):
 	text = \"Gold: \" + str(Global.gold)
 "
 
-[sub_resource type="Animation" id="Animation_pd2lm"]
-resource_name = "day_text_fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DayText:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.780392)]
-}
-
 [sub_resource type="Animation" id="Animation_lpfr8"]
 length = 0.001
 tracks/0/type = "value"
@@ -1302,6 +1287,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pd2lm"]
+resource_name = "day_text_fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DayText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.780392)]
 }
 
 [sub_resource type="Animation" id="Animation_2q6ob"]
@@ -1519,7 +1519,6 @@ occluder = SubResource("OccluderPolygon2D_xvg58")
 
 [node name="Inventory" parent="." instance=ExtResource("12_j5j2b")]
 layer = 2
-visible = false
 
 [node name="Shop2" parent="." instance=ExtResource("13_r4rxj")]
 layer = 2
