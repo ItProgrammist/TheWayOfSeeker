@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=30 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_g5g0l"]
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
@@ -8,11 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://buog20gu36iqu" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_8tqyp"]
 [ext_resource type="Texture2D" uid="uid://cceybwyswr8ku" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_ldgb2"]
 [ext_resource type="PackedScene" uid="uid://dkb00dhnq7atx" path="res://Build/shop.tscn" id="5_tmf5r"]
+[ext_resource type="Script" path="res://Build/shop.gd" id="7_ejmqa"]
 [ext_resource type="PackedScene" uid="uid://d0d3ei5ncwuqf" path="res://UI/pause_menu.tscn" id="9_ssbkr"]
+[ext_resource type="Script" path="res://Collectibles/Collectibles.gd" id="10_kvrbn"]
 [ext_resource type="Texture2D" uid="uid://bjoy7fw0fiudv" path="res://oak_woods_v1.0/decorations/circle.png" id="11_ivukq"]
-[ext_resource type="PackedScene" uid="uid://bqt15y2sofmg3" path="res://Mobs/anubis/anubis.tscn" id="11_m48rj"]
 [ext_resource type="PackedScene" uid="uid://dvvk20we6t4tr" path="res://UI/inventory.tscn" id="12_j5j2b"]
 [ext_resource type="Texture2D" uid="uid://b44rcpphpgc8d" path="res://Health Bar Asset Pack 2 by Adwit Rahman/greenbar (2).png" id="13_cb5x2"]
+[ext_resource type="PackedScene" uid="uid://c53vrr7uc3ujw" path="res://UI/shop_2.tscn" id="13_r4rxj"]
 [ext_resource type="Texture2D" uid="uid://buwhx5ho6prgw" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/helm.png" id="14_hte7x"]
 [ext_resource type="Script" path="res://UI/Armor.gd" id="14_yl6jq"]
 [ext_resource type="Texture2D" uid="uid://btjo3lchuvvum" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/armour.png" id="15_hh3t4"]
@@ -1269,21 +1271,60 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	text = \"Gold: \" + str($\"../../Seeker/Seeker\".gold)
+	text = \"Gold: \" + str(Global.gold)
 "
 
-[sub_resource type="GDScript" id="GDScript_s0wp7"]
-script/source = "extends Node2D
+[sub_resource type="Animation" id="Animation_pd2lm"]
+resource_name = "day_text_fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DayText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.780392)]
+}
 
-var gold = preload(\"res://Collectibles/gold_coin.tscn\")
+[sub_resource type="Animation" id="Animation_lpfr8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DayText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
-func _on_timer_timeout():
-	var goldTemp = gold.instantiate()
-	#var rng = RandomNumberGenerator.new()
-	var randint = randi_range(50, 1050)
-	goldTemp.position = Vector2(randint, 565)
-	add_child(goldTemp)
-"
+[sub_resource type="Animation" id="Animation_2q6ob"]
+resource_name = "day_text_fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DayText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.780392), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3tesq"]
+_data = {
+"RESET": SubResource("Animation_lpfr8"),
+"day_text_fade_in": SubResource("Animation_pd2lm"),
+"day_text_fade_out": SubResource("Animation_2q6ob")
+}
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvg58"]
 polygon = PackedVector2Array(-1907, 586, -1907, 659, 3843, 659, 3843, 587, 3699.06, 586.975)
@@ -1326,6 +1367,7 @@ texture = ExtResource("4_8tqyp")
 
 [node name="Shop" parent="." instance=ExtResource("5_tmf5r")]
 position = Vector2(1014, 544)
+script = ExtResource("7_ejmqa")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
@@ -1336,34 +1378,30 @@ layer_0/tile_data = PackedInt32Array(2359296, 65536, 0, 2359297, 131072, 0, 2359
 
 [node name="Items" type="Node2D" parent="."]
 
+[node name="Portal" type="Node" parent="."]
+
 [node name="Mobs" type="Node2D" parent="."]
 
-[node name="anubis" parent="Mobs" instance=ExtResource("11_m48rj")]
-position = Vector2(1485, 564)
-
 [node name="Spawner_skeleton" type="Timer" parent="Mobs"]
-wait_time = 10.0
-autostart = true
+wait_time = 15.0
 
 [node name="Spawner_golem" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 19.0
 
 [node name="Spawner_bat" type="Timer" parent="Mobs"]
 wait_time = 15.0
-autostart = true
 
 [node name="Spawner_minotaur" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 19.0
 
 [node name="Spawner_ventoss" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 15.0
 
 [node name="Spawner_dragon" type="Timer" parent="Mobs"]
-wait_time = 20.0
-autostart = true
+wait_time = 19.0
+
+[node name="Spawner_anubis" type="Timer" parent="Mobs"]
+wait_time = 19.0
 
 [node name="Seeker" type="Node2D" parent="."]
 
@@ -1404,8 +1442,19 @@ script = SubResource("GDScript_2co4l")
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_ssbkr")]
 process_mode = 2
 
+[node name="Save" type="Button" parent="CanvasLayer/PauseMenu/Panel/VBoxContainer" index="2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Save"
+
+[node name="Load" type="Button" parent="CanvasLayer/PauseMenu/Panel/VBoxContainer" index="3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Load"
+
 [node name="MenuButton" type="Button" parent="CanvasLayer"]
 process_mode = 3
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1417,11 +1466,25 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 26
 text = "Menu"
 
+[node name="DayText" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 1174.0
+offset_top = 211.0
+offset_right = 1333.0
+offset_bottom = 321.0
+theme_override_font_sizes/font_size = 100
+text = "DAY"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_3tesq")
+}
+
 [node name="Collectibles" type="Node2D" parent="."]
-script = SubResource("GDScript_s0wp7")
+script = ExtResource("10_kvrbn")
 
 [node name="Timer" type="Timer" parent="Collectibles"]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true
 
 [node name="Effects" type="Node2D" parent="."]
@@ -1456,6 +1519,11 @@ occluder = SubResource("OccluderPolygon2D_xvg58")
 
 [node name="Inventory" parent="." instance=ExtResource("12_j5j2b")]
 layer = 2
+visible = false
+
+[node name="Shop2" parent="." instance=ExtResource("13_r4rxj")]
+layer = 2
+visible = false
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
@@ -1466,6 +1534,7 @@ offset_bottom = 23.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
 
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer2"]
+visible = false
 offset_left = 128.0
 offset_top = -230.0
 offset_right = 1261.0
@@ -1528,11 +1597,14 @@ expand_mode = 1
 [connection signal="timeout" from="Mobs/Spawner_minotaur" to="." method="_on_spawner_minotaur_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_ventoss" to="." method="_on_spawner_ventoss_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_dragon" to="." method="_on_spawner_dragon_timeout"]
+[connection signal="timeout" from="Mobs/Spawner_anubis" to="." method="_on_spawner_anubis_timeout"]
 [connection signal="health_changed" from="Seeker/Seeker" to="." method="_on_seeker_health_changed"]
 [connection signal="timeout" from="Seeker/Timer_speed" to="Seeker/Seeker" method="_on_timer_speed_timeout"]
 [connection signal="timeout" from="Seeker/Timer_jump" to="Seeker/Seeker" method="_on_timer_jump_timeout"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Resume" to="Pause" method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Quit" to="Pause" method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Save" to="Pause" method="_on_save_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Load" to="Pause" method="_on_load_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="Pause" method="_on_menu_button_pressed"]
 [connection signal="timeout" from="Collectibles/Timer" to="Collectibles" method="_on_timer_timeout"]
 [connection signal="timeout" from="DayNight" to="." method="_on_day_night_timeout"]

@@ -27,13 +27,14 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var pre_inv = preload("res://UI/invent.tscn")
 @onready var pre_item = preload("res://UI/invent_item.tscn")
 @onready var world = get_viewport().get_node("Level")
+@onready var shop = get_viewport().get_node("Level/Shop2")
+
 
 var seeker_pos
 var armor_index = 1.0
 var max_health = 100 * armor_index
 var health
 var seeker_heat = false
-var gold = 0
 var seeker_heat_area = false
 var state = MOVE
 var run_speed = 1
@@ -53,10 +54,23 @@ func _ready():
 	Signals.connect("enemy_attack", Callable(self, "_on_damage_recieved"))
 	#Signals.connect("enemy_position_update", Callable(self, "_on_enemy_position_update"))		
 	health = max_health
+	Global.run_speed = false
+	Global.jump = false
+	Global.day_count = 0;
+	Global.count_bat = 0
+	Global.count_skeleton = 0
+	Global.count_minotaur = 0
+	Global.count_golem = 0
+	Global.count_ventoss = 0
+	Global.count_dragon = 0
+	Global.count_anubis = 0
+	armor_index = 1
+	damage_coeff = 1
 
 func _physics_process(delta):
 	
 	damage_curr = damage_base * damage_coeff
+	max_health = 100 * armor_index
 	
 	match state:
 		MOVE:
@@ -105,6 +119,9 @@ func pick(item):
 func _unhandled_input(event):
 	if event.is_action_pressed("inventory"):
 		ui.toggle_inventory(inventory)
+	if event.is_action_pressed("shop") and (position.x > 950 and position.x < 1050):
+		shop.visible = !shop.visible
+		
 
 func create_inventory():
 	inventory = pre_inv.instantiate()
@@ -230,6 +247,18 @@ func slide_state():
 
 func death_state():
 	velocity.x = 0
+	Global.run_speed = false
+	Global.jump = false
+	Global.day_count = 0;
+	Global.count_bat = 0
+	Global.count_skeleton = 0
+	Global.count_minotaur = 0
+	Global.count_golem = 0
+	Global.count_ventoss = 0
+	Global.count_dragon = 0
+	Global.count_anubis = 0
+	armor_index = 1
+	damage_coeff = 1
 	anim.play("Death")
 	await get_tree().create_timer(0.7).timeout
 	queue_free()
