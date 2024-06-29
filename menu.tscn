@@ -64,5 +64,9 @@ position = Vector2(1275.67, 694.5)
 scale = Vector2(7.99444, 7.99444)
 texture = ExtResource("4_w1xa8")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(574, 323)
+zoom = Vector2(1.2, 1.2)
+
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

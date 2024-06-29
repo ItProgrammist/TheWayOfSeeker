@@ -1,3 +1,7 @@
+res://Aseprite/sound/music
+res://free-swamp-game-tileset-pixel-art/3 Objects/Stones
+res://free-swamp-game-tileset-pixel-art/3 Objects/Willows
+res://free-swamp-game-tileset-pixel-art/3 Objects/Trees
 res://UI
 res://Collectibles
 <<<<<<< HEAD
@@ -16,7 +20,3 @@ res://oak_woods_v1.0/decorations
 res://Players_Frames/Adventurer
 res://oak_woods_v1.0/character
 res://Monsters_Creatures_Fantasy/Flying eye
-res://Animated Sideview Battlers/Minotaur Beef
-res://Animated Sideview Battlers/Dragon Demios
-res://Animated Sideview Battlers/Ventoss
-res://Mobs/dragon

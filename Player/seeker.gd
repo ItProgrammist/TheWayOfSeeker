@@ -189,7 +189,7 @@ func move_state():
 	if Input.is_action_pressed("block"):
 		state = BLOCK
 	
-	if Input.is_action_just_pressed("slide") and velocity.x != 0:
+	if Input.is_action_just_pressed("slide") and velocity.x != 0 and velocity.y == 0:
 		state = SLIDE
 		
 func classic_attack():

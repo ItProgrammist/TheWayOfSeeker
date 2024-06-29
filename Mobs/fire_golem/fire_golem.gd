@@ -62,7 +62,7 @@ func _physics_process(delta):
 	
 	if health <= 0:
 		Global.count_golem -= 1
-
+		#Signals.emit_signal("enemy_died", position)
 		animPlayer.play(("Death"))
 		await animPlayer.animation_finished
 		queue_free()

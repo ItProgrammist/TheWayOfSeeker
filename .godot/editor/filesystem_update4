@@ -1,3 +1,13 @@
+res://Mobs/minotaur_beef/minotaur_beef.tscn
+res://Mobs/ventoss/ventoss.gd
+res://Mobs/dragon/dragon.gd
+res://Mobs/anubis/anubis.gd
+res://Mobs/skeleton.gd
+res://bat.gd
+res://Mobs/skeleton/skeleton.gd
+res://Mobs/minotaur_beef/minotaur_beef.gd
+res://Mobs/ventoss/ventoss.tscn
+res://Mobs/anubis/anubis.tscn
 res://menu.tscn
 res://level.tscn
 res://Mobs/skeleton/skeleton.tscn
@@ -8,8 +18,5 @@ res://Collectibles/gold_coin.tscn
 res://UI/inventory.tscn
 res://UI/shop_2.tscn
 res://UI/invent_item.tscn
+res://Player/seeker.tscn
 res://level.gd
-res://Pause.gd
-res://global.gd
-res://Player/seeker.gd
-res://Collectibles/gold_coin.gd

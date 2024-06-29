@@ -139,7 +139,7 @@ func chase_state():
 		$AnimatedSprite2D.flip_h = false
 		$AttackDirection.rotation_degrees = 0
 	if chase:
-		animPlayer.play("Run")
+		animPlayer.play("default")
 		speed = speed_base
 	else:
 		velocity.x = 0
@@ -152,7 +152,7 @@ func damage_state():
 
 func death_state():
 	Global.count_bat -= 1
-	#Signals.emit_signal("enemy_died", position)
+	Signals.emit_signal("enemy_died", position)
 	animPlayer.play("Death")
 	await animPlayer.animation_finished
 	queue_free()

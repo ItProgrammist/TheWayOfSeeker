@@ -683,6 +683,21 @@ tracks/1/keys = {
 "values": ["Jump"]
 }
 
+[sub_resource type="Animation" id="Animation_rnkjw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_8i3et"]
 length = 0.6
 loop_mode = 1
@@ -765,21 +780,6 @@ tracks/1/keys = {
 "values": ["default"]
 }
 
-[sub_resource type="Animation" id="Animation_rnkjw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackDirection/DamageBox/HitBox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a2ik5"]
 _data = {
 "Attack1": SubResource("Animation_gqelw"),
@@ -807,9 +807,9 @@ shape = SubResource("CapsuleShape2D_vcpqa")
 position = Vector2(4, -10)
 scale = Vector2(1.44444, 1.40541)
 sprite_frames = SubResource("SpriteFrames_rev4y")
-animation = &"Attack3"
+animation = &"Attack2"
 autoplay = "default"
-frame = 5
+frame = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)

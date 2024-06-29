@@ -1,3 +1,7 @@
+AudioStreamPlayer2D
+Sprite2D
+AnimatedSprite2D
+Camera2D
 Button
 Node
 Node2D
@@ -8,7 +12,3 @@ VBoxContainer
 HBoxContainer
 PanelContainer
 Control
-CanvasLayer
-Timer
-Panel
-TextureProgressBar

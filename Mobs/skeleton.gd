@@ -35,6 +35,8 @@ func _physics_process(delta):
 			$AnimatedSprite2D.flip_h = false
 	
 	if health <= 0:
+		Global.count_skeleton -= 1
+		#Signals.emit_signal("enemy_died", position)
 		anim.play(("Death"))
 		await anim.animation_finished
 		queue_free()

@@ -68,7 +68,7 @@ offset_top = 113.5
 offset_right = 294.5
 offset_bottom = 168.5
 theme_override_font_sizes/font_size = 40
-text = "70"
+text = "700"
 
 [node name="helm" type="Button" parent="Control/PanelContainer/1"]
 anchors_preset = 15
@@ -92,7 +92,7 @@ offset_top = 109.5
 offset_right = 17.5
 offset_bottom = 164.5
 theme_override_font_sizes/font_size = 40
-text = "15"
+text = "150"
 
 [node name="red_potion" type="Button" parent="Control/PanelContainer/135"]
 anchors_preset = 15
@@ -116,7 +116,7 @@ offset_top = 113.5
 offset_right = -256.5
 offset_bottom = 168.5
 theme_override_font_sizes/font_size = 40
-text = "50"
+text = "500"
 
 [node name="armour" type="Button" parent="Control/PanelContainer/2"]
 anchors_preset = 15
@@ -140,7 +140,7 @@ offset_top = 112.5
 offset_right = 21.5
 offset_bottom = 167.5
 theme_override_font_sizes/font_size = 40
-text = "40"
+text = "400"
 
 [node name="boot" type="Button" parent="Control/PanelContainer/4"]
 anchors_preset = 15
@@ -164,7 +164,7 @@ offset_top = 109.5
 offset_right = -9.5
 offset_bottom = 164.5
 theme_override_font_sizes/font_size = 40
-text = "60"
+text = "600"
 
 [node name="sword" type="Button" parent="Control/PanelContainer/5"]
 anchors_preset = 15
@@ -188,7 +188,7 @@ offset_top = 112.5
 offset_right = 16.5
 offset_bottom = 167.5
 theme_override_font_sizes/font_size = 40
-text = "10"
+text = "100"
 
 [node name="blue_potion" type="Button" parent="Control/PanelContainer/125"]
 anchors_preset = 15
@@ -212,7 +212,7 @@ offset_top = 113.5
 offset_right = 6.5
 offset_bottom = 168.5
 theme_override_font_sizes/font_size = 40
-text = "10"
+text = "100"
 
 [node name="green_potion" type="Button" parent="Control/PanelContainer/115"]
 anchors_preset = 15
@@ -227,37 +227,37 @@ grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_1pfcd")
 
 [node name="1Coin8" type="Sprite2D" parent="Control/PanelContainer"]
-position = Vector2(151.5, 570)
+position = Vector2(179.5, 570)
 scale = Vector2(0.0599997, 0.0575)
 texture = ExtResource("9_ai010")
 
 [node name="1Coin9" type="Sprite2D" parent="Control/PanelContainer"]
-position = Vector2(441.5, 570)
+position = Vector2(458.5, 570)
 scale = Vector2(0.0599997, 0.0575)
 texture = ExtResource("9_ai010")
 
 [node name="1Coin10" type="Sprite2D" parent="Control/PanelContainer"]
-position = Vector2(720.5, 570)
+position = Vector2(741.5, 570)
 scale = Vector2(0.0599997, 0.0575)
 texture = ExtResource("9_ai010")
 
 [node name="1Coin11" type="Sprite2D" parent="Control/PanelContainer"]
-position = Vector2(980, 270)
+position = Vector2(1005.5, 270)
 scale = Vector2(0.0599997, 0.0575)
 texture = ExtResource("9_ai010")
 
 [node name="1Coin12" type="Sprite2D" parent="Control/PanelContainer"]
-position = Vector2(725, 270)
+position = Vector2(744.5, 270)
 scale = Vector2(0.0599997, 0.0575)
 texture = ExtResource("9_ai010")
 
 [node name="1Coin13" type="Sprite2D" parent="Control/PanelContainer"]
-position = Vector2(430, 270)
+position = Vector2(452.5, 270)
 scale = Vector2(0.0599997, 0.0575)
 texture = ExtResource("9_ai010")
 
 [node name="1Coin14" type="Sprite2D" parent="Control/PanelContainer"]
-position = Vector2(160, 270)
+position = Vector2(178.5, 270.5)
 scale = Vector2(0.0599997, 0.0575)
 texture = ExtResource("9_ai010")
 

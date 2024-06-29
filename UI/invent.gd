@@ -1,6 +1,6 @@
 extends Control
 
-@onready var items = []
+#@onready var items = []
 var inventory_owner = null
 
 func set_inv_owner(val):
@@ -13,22 +13,24 @@ func add_item(item):
 	var added = false
 	
 	if item.can_stack():
-		for i in items:
+		for i in Global.items:
 			if i.get_item_name() == item.get_item_name():
 				i.add_amount(item.get_amount())
 				added = true
 				item.queue_free()
 				break
 	if not item.can_stack() or not added:
-		items.append(item)
+		Global.items.append(item)
 		item.set_inventory(self)
 	
 	emit_signal("on_changed")
 
 func get_items():
-	return items
+	return Global.items
 
 func remove_item(link):
+	var items = Global.items
 	items.remove_at(items.find(link))
+	Global.items = items
 	link.queue_free()
 	emit_signal("on_changed")

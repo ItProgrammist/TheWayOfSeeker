@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b5c2fm14vp4cy"]
+[gd_scene load_steps=35 format=3 uid="uid://b5c2fm14vp4cy"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_g5g0l"]
 [ext_resource type="PackedScene" uid="uid://bgbwdq5w55pl1" path="res://Player/seeker.tscn" id="1_lcq2p"]
@@ -20,6 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://btjo3lchuvvum" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/armour.png" id="15_hh3t4"]
 [ext_resource type="Texture2D" uid="uid://b316cxejoo8gq" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/boot.png" id="16_7q0xq"]
 [ext_resource type="Texture2D" uid="uid://sld2ec7fddix" path="res://CraftpixPacks/Kasaya's Frames/Inventory & chests/2/brown slot.png" id="17_8wg2g"]
+[ext_resource type="Texture2D" uid="uid://srs5qtll61qr" path="res://free-swamp-game-tileset-pixel-art/3 Objects/Trees/1.png" id="21_mo1uc"]
+[ext_resource type="Texture2D" uid="uid://brqv2i6lxyh28" path="res://free-swamp-game-tileset-pixel-art/3 Objects/Willows/1.png" id="22_wusrx"]
+[ext_resource type="Texture2D" uid="uid://i3xgch1g20u0" path="res://free-swamp-game-tileset-pixel-art/3 Objects/Willows/2.png" id="23_5alu6"]
+[ext_resource type="Texture2D" uid="uid://bcnun1i5x71ss" path="res://free-swamp-game-tileset-pixel-art/3 Objects/Stones/2.png" id="24_0q4o8"]
+[ext_resource type="AudioStream" uid="uid://k17knakn1n8w" path="res://Aseprite/sound/music/medieval-fantasy-142837.mp3" id="25_s7xa2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnvtf"]
 texture = ExtResource("5_ldgb2")
@@ -1274,21 +1279,6 @@ func _process(_delta):
 	text = \"Gold: \" + str(Global.gold)
 "
 
-[sub_resource type="Animation" id="Animation_pd2lm"]
-resource_name = "day_text_fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DayText:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.780392)]
-}
-
 [sub_resource type="Animation" id="Animation_lpfr8"]
 length = 0.001
 tracks/0/type = "value"
@@ -1302,6 +1292,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pd2lm"]
+resource_name = "day_text_fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DayText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.780392)]
 }
 
 [sub_resource type="Animation" id="Animation_2q6ob"]
@@ -1383,10 +1388,10 @@ layer_0/tile_data = PackedInt32Array(2359296, 65536, 0, 2359297, 131072, 0, 2359
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Spawner_skeleton" type="Timer" parent="Mobs"]
-wait_time = 15.0
+wait_time = 10.0
 
 [node name="Spawner_golem" type="Timer" parent="Mobs"]
-wait_time = 19.0
+wait_time = 10.0
 
 [node name="Spawner_bat" type="Timer" parent="Mobs"]
 wait_time = 15.0
@@ -1444,11 +1449,13 @@ process_mode = 2
 
 [node name="Save" type="Button" parent="CanvasLayer/PauseMenu/Panel/VBoxContainer" index="2"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Save"
 
 [node name="Load" type="Button" parent="CanvasLayer/PauseMenu/Panel/VBoxContainer" index="3"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Load"
 
@@ -1497,7 +1504,7 @@ range_layer_min = -1
 shadow_enabled = true
 
 [node name="DayNight" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 2.0
 autostart = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -1519,7 +1526,6 @@ occluder = SubResource("OccluderPolygon2D_xvg58")
 
 [node name="Inventory" parent="." instance=ExtResource("12_j5j2b")]
 layer = 2
-visible = false
 
 [node name="Shop2" parent="." instance=ExtResource("13_r4rxj")]
 layer = 2
@@ -1534,7 +1540,6 @@ offset_bottom = 23.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
 
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer2"]
-visible = false
 offset_left = 128.0
 offset_top = -230.0
 offset_right = 1261.0
@@ -1590,6 +1595,42 @@ layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("17_8wg2g")
 expand_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(3270, 528)
+texture = ExtResource("21_mo1uc")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-1161, 528)
+texture = ExtResource("21_mo1uc")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-302, 512)
+texture = ExtResource("22_wusrx")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(2165, 495)
+texture = ExtResource("23_5alu6")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(68, 557)
+scale = Vector2(0.755319, 0.755319)
+texture = ExtResource("24_0q4o8")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(246, 557)
+scale = Vector2(0.755319, 0.755319)
+texture = ExtResource("24_0q4o8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_s7xa2")
+autoplay = true
 
 [connection signal="timeout" from="Mobs/Spawner_skeleton" to="." method="_on_spawner_timeout"]
 [connection signal="timeout" from="Mobs/Spawner_golem" to="." method="_on_spawner_golem_timeout"]
